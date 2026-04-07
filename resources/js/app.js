@@ -16,6 +16,8 @@ createInertiaApp({
             import.meta.glob('./Pages/**/*.vue'),
         ),
     setup({ el, App, props, plugin }) {
+        // Le div #app doit propager le flex de <body> pour que Metronic fonctionne
+        el.classList.add('flex', 'grow', 'h-full', 'w-full');
         return createApp({ render: () => h(App, props) })
             .use(plugin)
             .use(ZiggyVue)

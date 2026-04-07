@@ -14,15 +14,16 @@ class FilialeSeeder extends Seeder
         $cbi = Entity::where('slug', 'coris-bank-international')->first();
 
         $filiales = [
-            ['name' => 'CBI Bénin',        'country' => 'Bénin'],
-            ['name' => 'CBI Burkina Faso', 'country' => 'Burkina Faso'],
-            ['name' => 'CBI Côte d\'Ivoire','country' => 'Côte d\'Ivoire'],
-            ['name' => 'CBI Guinée',       'country' => 'Guinée'],
-            ['name' => 'CBI Guinée Bissau','country' => 'Guinée Bissau'],
-            ['name' => 'CBI Mali',         'country' => 'Mali'],
-            ['name' => 'CBI Niger',        'country' => 'Niger'],
-            ['name' => 'CBI Sénégal',      'country' => 'Sénégal'],
-            ['name' => 'CBI Togo',         'country' => 'Togo'],
+            ['name' => 'Bénin',         'country' => 'Bénin'],
+            ['name' => 'Burkina Faso',  'country' => 'Burkina Faso'],
+            ['name' => 'Côte d\'Ivoire','country' => 'Côte d\'Ivoire'],
+            ['name' => 'Guinée',        'country' => 'Guinée'],
+            ['name' => 'Guinée Bissau', 'country' => 'Guinée Bissau'],
+            ['name' => 'Mali',          'country' => 'Mali'],
+            ['name' => 'Niger',         'country' => 'Niger'],
+            ['name' => 'Sénégal',       'country' => 'Sénégal'],
+            ['name' => 'Tchad',         'country' => 'Tchad'],
+            ['name' => 'Togo',          'country' => 'Togo'],
         ];
 
         foreach ($filiales as $filiale) {

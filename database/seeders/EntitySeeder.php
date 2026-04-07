@@ -14,7 +14,6 @@ class EntitySeeder extends Seeder
             'Coris Holding',
             'Coris Bank International',
             'CBI Baraka',
-            'Coris Money',
             'Coris Méso Finance',
         ];
 

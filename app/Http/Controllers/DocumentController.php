@@ -20,21 +20,11 @@ class DocumentController extends Controller
         $query = Document::with(['entity', 'filiale', 'category', 'subcategory'])
             ->where('is_active', true);
 
-        if ($request->entity_id) {
-            $query->where('entity_id', $request->entity_id);
-        }
-        if ($request->filiale_id) {
-            $query->where('filiale_id', $request->filiale_id);
-        }
-        if ($request->category_id) {
-            $query->where('category_id', $request->category_id);
-        }
-        if ($request->subcategory_id) {
-            $query->where('subcategory_id', $request->subcategory_id);
-        }
-        if ($request->year) {
-            $query->where('year', $request->year);
-        }
+        if ($request->entity_id)      $query->whereIn('entity_id', (array) $request->entity_id);
+        if ($request->filiale_id)     $query->whereIn('filiale_id', (array) $request->filiale_id);
+        if ($request->category_id)    $query->whereIn('category_id', (array) $request->category_id);
+        if ($request->subcategory_id) $query->whereIn('subcategory_id', (array) $request->subcategory_id);
+        if ($request->year)           $query->whereIn('year', (array) $request->year);
         if ($request->search) {
             $query->where(function ($q) use ($request) {
                 $q->where('title', 'like', '%' . $request->search . '%')
@@ -49,13 +39,30 @@ class DocumentController extends Controller
 
         $documents = $query->orderBy('created_at', 'desc')->paginate(24)->withQueryString();
 
+        $baseQuery = Document::where('is_active', true);
+        if ($user->isRmc() && $user->filiale_id) {
+            $baseQuery->where('filiale_id', $user->filiale_id);
+        }
+
+        $counts = [
+            'entity'   => (clone $baseQuery)->whereNotNull('entity_id')->groupBy('entity_id')
+                            ->selectRaw('entity_id as id, count(*) as total')->pluck('total', 'id'),
+            'filiale'  => (clone $baseQuery)->whereNotNull('filiale_id')->groupBy('filiale_id')
+                            ->selectRaw('filiale_id as id, count(*) as total')->pluck('total', 'id'),
+            'category' => (clone $baseQuery)->whereNotNull('category_id')->groupBy('category_id')
+                            ->selectRaw('category_id as id, count(*) as total')->pluck('total', 'id'),
+            'year'     => (clone $baseQuery)->whereNotNull('year')->groupBy('year')
+                            ->selectRaw('year as id, count(*) as total')->pluck('total', 'id'),
+        ];
+
         return Inertia::render('Library/Index', [
             'documents'  => $documents,
             'entities'   => Entity::where('is_active', true)->get(),
             'filiales'   => Filiale::where('is_active', true)->get(),
             'categories' => Category::with('subcategories')->get(),
-            'years'      => Document::distinct()->orderBy('year', 'desc')->pluck('year'),
+            'years'      => Document::where('is_active', true)->distinct()->orderBy('year', 'desc')->pluck('year'),
             'filters'    => $request->only(['entity_id', 'filiale_id', 'category_id', 'subcategory_id', 'year', 'search']),
+            'counts'     => $counts,
         ]);
     }
 
@@ -137,11 +144,11 @@ class DocumentController extends Controller
         $query = Document::with(['entity', 'filiale', 'category', 'subcategory', 'uploader'])
             ->where('is_active', true);
 
-        if ($request->entity_id)      $query->where('entity_id', $request->entity_id);
-        if ($request->filiale_id)     $query->where('filiale_id', $request->filiale_id);
-        if ($request->category_id)    $query->where('category_id', $request->category_id);
-        if ($request->subcategory_id) $query->where('subcategory_id', $request->subcategory_id);
-        if ($request->year)           $query->where('year', $request->year);
+        if ($request->entity_id)      $query->whereIn('entity_id', (array) $request->entity_id);
+        if ($request->filiale_id)     $query->whereIn('filiale_id', (array) $request->filiale_id);
+        if ($request->category_id)    $query->whereIn('category_id', (array) $request->category_id);
+        if ($request->subcategory_id) $query->whereIn('subcategory_id', (array) $request->subcategory_id);
+        if ($request->year)           $query->whereIn('year', (array) $request->year);
         if ($request->search) {
             $query->where(function ($q) use ($request) {
                 $q->where('title', 'like', '%' . $request->search . '%')
@@ -196,6 +203,47 @@ class DocumentController extends Controller
             $document->file_path,
             $document->title . '.' . $document->file_extension
         );
+    }
+
+    public function downloadZip(Request $request)
+    {
+        $request->validate([
+            'ids'   => 'required|array|min:1|max:50',
+            'ids.*' => 'integer|exists:documents,id',
+        ]);
+
+        $documents = Document::whereIn('id', $request->ids)
+            ->where('is_active', true)
+            ->get();
+
+        if ($documents->isEmpty()) {
+            abort(404);
+        }
+
+        $user = Auth::user();
+
+        $tmpPath = sys_get_temp_dir() . '/dmc_zip_' . uniqid() . '.zip';
+        $zip = new \ZipArchive();
+        $zip->open($tmpPath, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
+
+        foreach ($documents as $doc) {
+            // RMC ne peut télécharger que sa filiale
+            if ($user->isRmc() && $doc->filiale_id !== $user->filiale_id) {
+                continue;
+            }
+
+            $filePath = Storage::disk('public')->path($doc->file_path);
+            if (file_exists($filePath)) {
+                $doc->increment('download_count');
+                $zip->addFile($filePath, $doc->title . '.' . $doc->file_extension);
+            }
+        }
+
+        $zip->close();
+
+        return response()->download($tmpPath, 'documents_' . now()->format('Ymd_His') . '.zip', [
+            'Content-Type' => 'application/zip',
+        ])->deleteFileAfterSend(true);
     }
 
     public function stream(Document $document)

@@ -45,9 +45,9 @@ const deleteSub = (sub) => {
     <Head title="Catégories — Admin" />
     <AppLayout>
         <div class="flex items-center justify-between mb-6">
-            <h1 class="text-2xl font-bold text-gray-800">Catégories</h1>
+            <h1 class="text-2xl font-bold text-foreground">Catégories</h1>
             <button @click="openCatCreate"
-                class="flex items-center gap-2 px-4 py-2 bg-blue-800 text-white rounded-lg hover:bg-blue-900 transition text-sm font-medium">
+                class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-900 transition text-sm font-medium">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                 </svg>
@@ -56,53 +56,53 @@ const deleteSub = (sub) => {
         </div>
 
         <div class="space-y-4">
-            <div v-for="cat in categories" :key="cat.id" class="bg-white rounded-xl border border-gray-200 p-5">
+            <div v-for="cat in categories" :key="cat.id" class="bg-background rounded-xl border border-border p-5">
                 <div class="flex items-center justify-between mb-4">
                     <div>
-                        <h3 class="font-semibold text-gray-800 text-lg">{{ cat.name }}</h3>
-                        <p class="text-xs text-gray-400 mt-0.5">{{ cat.documents_count }} document{{ cat.documents_count > 1 ? 's' : '' }}</p>
+                        <h3 class="font-semibold text-foreground text-lg">{{ cat.name }}</h3>
+                        <p class="text-xs text-muted-foreground mt-0.5">{{ cat.documents_count }} document{{ cat.documents_count > 1 ? 's' : '' }}</p>
                     </div>
                     <div class="flex gap-3 items-center">
                         <button @click="openSubCreate(cat)"
-                            class="text-xs text-blue-600 hover:text-blue-800 font-medium border border-blue-200 rounded-lg px-3 py-1">
+                            class="text-xs text-primary hover:text-primary font-medium border border-blue-200 rounded-lg px-3 py-1">
                             + Sous-catégorie
                         </button>
-                        <button @click="deleteCat(cat)" class="text-xs text-red-500 hover:text-red-700 font-medium">Supprimer</button>
+                        <button @click="deleteCat(cat)" class="text-xs text-destructive hover:text-red-700 font-medium">Supprimer</button>
                     </div>
                 </div>
                 <div class="flex flex-wrap gap-2">
                     <div v-for="sub in cat.subcategories" :key="sub.id"
-                        class="flex items-center gap-2 bg-gray-100 rounded-lg px-3 py-1.5">
-                        <span class="text-sm text-gray-700">{{ sub.name }}</span>
-                        <button @click="deleteSub(sub)" class="text-gray-400 hover:text-red-500 transition">
+                        class="flex items-center gap-2 bg-accent/50 rounded-lg px-3 py-1.5">
+                        <span class="text-sm text-foreground">{{ sub.name }}</span>
+                        <button @click="deleteSub(sub)" class="text-muted-foreground hover:text-destructive transition">
                             <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
                     </div>
-                    <span v-if="!cat.subcategories.length" class="text-xs text-gray-400 italic">Aucune sous-catégorie</span>
+                    <span v-if="!cat.subcategories.length" class="text-xs text-muted-foreground italic">Aucune sous-catégorie</span>
                 </div>
             </div>
         </div>
 
         <!-- Modal catégorie -->
         <div v-if="showCatModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-60" @click.self="showCatModal = false">
-            <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full p-6">
-                <h3 class="font-bold text-gray-800 mb-4">Nouvelle catégorie</h3>
+            <div class="bg-background rounded-2xl shadow-2xl max-w-sm w-full p-6">
+                <h3 class="font-bold text-foreground mb-4">Nouvelle catégorie</h3>
                 <form @submit.prevent="submitCat" class="space-y-4">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Nom *</label>
+                        <label class="block text-sm font-medium text-foreground mb-1">Nom *</label>
                         <input v-model="catForm.name" type="text" required
-                            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none" />
-                        <p v-if="catForm.errors.name" class="text-red-500 text-xs mt-1">{{ catForm.errors.name }}</p>
+                            class="w-full border border-input rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-primary outline-none" />
+                        <p v-if="catForm.errors.name" class="text-destructive text-xs mt-1">{{ catForm.errors.name }}</p>
                     </div>
                     <div class="flex gap-3">
                         <button type="submit" :disabled="catForm.processing"
-                            class="flex-1 py-2 bg-blue-800 text-white rounded-lg hover:bg-blue-900 transition text-sm font-medium disabled:opacity-60">
+                            class="flex-1 py-2 bg-primary text-white rounded-lg hover:bg-blue-900 transition text-sm font-medium disabled:opacity-60">
                             {{ catForm.processing ? '...' : 'Créer' }}
                         </button>
                         <button type="button" @click="showCatModal = false"
-                            class="px-4 py-2 border border-gray-200 text-gray-600 rounded-lg text-sm">Annuler</button>
+                            class="px-4 py-2 border border-border text-foreground/80 rounded-lg text-sm">Annuler</button>
                     </div>
                 </form>
             </div>
@@ -110,23 +110,23 @@ const deleteSub = (sub) => {
 
         <!-- Modal sous-catégorie -->
         <div v-if="showSubModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-60" @click.self="showSubModal = false">
-            <div class="bg-white rounded-2xl shadow-2xl max-w-sm w-full p-6">
-                <h3 class="font-bold text-gray-800 mb-1">Nouvelle sous-catégorie</h3>
-                <p class="text-sm text-gray-500 mb-4">dans <strong>{{ selectedCat?.name }}</strong></p>
+            <div class="bg-background rounded-2xl shadow-2xl max-w-sm w-full p-6">
+                <h3 class="font-bold text-foreground mb-1">Nouvelle sous-catégorie</h3>
+                <p class="text-sm text-muted-foreground mb-4">dans <strong>{{ selectedCat?.name }}</strong></p>
                 <form @submit.prevent="submitSub" class="space-y-4">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Nom *</label>
+                        <label class="block text-sm font-medium text-foreground mb-1">Nom *</label>
                         <input v-model="subForm.name" type="text" required
-                            class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none" />
-                        <p v-if="subForm.errors.name" class="text-red-500 text-xs mt-1">{{ subForm.errors.name }}</p>
+                            class="w-full border border-input rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-primary outline-none" />
+                        <p v-if="subForm.errors.name" class="text-destructive text-xs mt-1">{{ subForm.errors.name }}</p>
                     </div>
                     <div class="flex gap-3">
                         <button type="submit" :disabled="subForm.processing"
-                            class="flex-1 py-2 bg-blue-800 text-white rounded-lg hover:bg-blue-900 transition text-sm font-medium disabled:opacity-60">
+                            class="flex-1 py-2 bg-primary text-white rounded-lg hover:bg-blue-900 transition text-sm font-medium disabled:opacity-60">
                             {{ subForm.processing ? '...' : 'Créer' }}
                         </button>
                         <button type="button" @click="showSubModal = false"
-                            class="px-4 py-2 border border-gray-200 text-gray-600 rounded-lg text-sm">Annuler</button>
+                            class="px-4 py-2 border border-border text-foreground/80 rounded-lg text-sm">Annuler</button>
                     </div>
                 </form>
             </div>
