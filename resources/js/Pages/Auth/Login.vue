@@ -38,65 +38,53 @@ const submit = () => {
             <div class="absolute inset-0"
                 style="background: linear-gradient(to bottom, rgba(0,20,60,0.50) 0%, rgba(0,30,80,0.20) 50%, rgba(0,20,60,0.55) 100%)"></div>
 
-            <!-- Contenu centré -->
-            <div class="relative flex flex-col items-center justify-center h-full px-12 text-center space-y-8">
+            <!-- Contenu : flex colonne, haut / centre / bas -->
+            <div class="relative flex flex-col justify-between h-full py-10 px-10 text-center">
 
-                <!-- Logo -->
-                <div class="flex flex-col items-center gap-4">
-                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-5 border border-white/15 shadow-2xl">
-                        <img src="/images/logo-icon.svg" alt="Coris Holding" class="h-20 w-20" />
-                    </div>
+                <!-- Logo en haut -->
+                <div class="flex flex-col items-center gap-3">
+                    <img src="/images/logo-icon.svg" alt="Coris Holding" class="h-16 w-16 drop-shadow-2xl" />
                     <div>
-                        <p class="text-white text-2xl font-bold tracking-tight leading-none">Coris Holding</p>
-                        <p class="text-blue-300 text-sm mt-1 font-medium tracking-widest uppercase">DMC DataBox</p>
+                        <p class="text-white text-lg font-bold tracking-tight" style="text-shadow: 0 2px 12px rgba(0,0,0,0.8)">Coris Holding</p>
+                        <p class="text-blue-100 text-xs font-semibold tracking-widest uppercase mt-0.5" style="text-shadow: 0 1px 8px rgba(0,0,0,0.9)">DMC DataBox</p>
                     </div>
                 </div>
 
-                <!-- Séparateur -->
-                <div class="w-12 h-px bg-white/20"></div>
-
-                <!-- Titre -->
-                <div class="space-y-3 max-w-xs">
-                    <h1 class="text-4xl font-extrabold text-white leading-tight tracking-tight">
+                <!-- Titre au centre -->
+                <div class="space-y-4">
+                    <h1 class="text-5xl font-extrabold text-white leading-tight tracking-tight"
+                        style="text-shadow: 0 2px 20px rgba(0,0,0,0.9), 0 4px 40px rgba(0,0,0,0.6)">
                         Gestion<br>
-                        <span style="color:#60a5fa;">documentaire</span><br>
+                        <span style="color:#93c5fd; text-shadow: 0 2px 20px rgba(0,0,0,0.9)">documentaire</span><br>
                         centralisée
                     </h1>
-                    <p class="text-blue-200/70 text-sm leading-relaxed">
-                        Archivez, organisez et accédez à tous les documents de la DMC en un seul endroit.
+                    <p class="text-white/90 text-sm leading-relaxed max-w-xs mx-auto"
+                        style="text-shadow: 0 1px 10px rgba(0,0,0,0.9)">
+                        Archivez, organisez et accédez à tous les documents de la DMC Coris Holding.
                     </p>
+
+                    <!-- Feature pills -->
+                    <div class="flex justify-center gap-3 pt-2">
+                        <span class="flex items-center gap-1.5 text-xs text-white font-medium px-3 py-1.5 rounded-full"
+                            style="background:rgba(0,0,0,0.35); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.2); text-shadow:0 1px 4px rgba(0,0,0,0.8)">
+                            <i class="ki-filled ki-photo text-blue-200 text-sm"></i> Graphisme
+                        </span>
+                        <span class="flex items-center gap-1.5 text-xs text-white font-medium px-3 py-1.5 rounded-full"
+                            style="background:rgba(0,0,0,0.35); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.2); text-shadow:0 1px 4px rgba(0,0,0,0.8)">
+                            <i class="ki-filled ki-film text-blue-200 text-sm"></i> Audiovisuel
+                        </span>
+                        <span class="flex items-center gap-1.5 text-xs text-white font-medium px-3 py-1.5 rounded-full"
+                            style="background:rgba(0,0,0,0.35); backdrop-filter:blur(8px); border:1px solid rgba(255,255,255,0.2); text-shadow:0 1px 4px rgba(0,0,0,0.8)">
+                            <i class="ki-filled ki-file-text text-blue-200 text-sm"></i> Documents
+                        </span>
+                    </div>
                 </div>
 
-                <!-- Feature cards -->
-                <div class="grid grid-cols-3 gap-3 w-full max-w-xs">
-                    <div class="bg-white/8 border border-white/10 rounded-xl p-3 text-center backdrop-blur-sm">
-                        <i class="ki-filled ki-photo text-blue-300 text-2xl block mb-1.5"></i>
-                        <p class="text-white text-xs font-semibold">Graphisme</p>
-                    </div>
-                    <div class="bg-white/8 border border-white/10 rounded-xl p-3 text-center backdrop-blur-sm">
-                        <i class="ki-filled ki-film text-blue-300 text-2xl block mb-1.5"></i>
-                        <p class="text-white text-xs font-semibold">Audiovisuel</p>
-                    </div>
-                    <div class="bg-white/8 border border-white/10 rounded-xl p-3 text-center backdrop-blur-sm">
-                        <i class="ki-filled ki-file-text text-blue-300 text-2xl block mb-1.5"></i>
-                        <p class="text-white text-xs font-semibold">Documents</p>
-                    </div>
-                </div>
+                <!-- Copyright bas -->
+                <p class="text-white/50 text-xs" style="text-shadow: 0 1px 6px rgba(0,0,0,0.8)">
+                    © {{ new Date().getFullYear() }} Coris Holding — DMC DataBox v1.0
+                </p>
 
-                <!-- Filiales -->
-                <div class="flex flex-wrap justify-center gap-2 max-w-xs">
-                    <span v-for="e in ['Burkina Faso', 'Bénin', 'Côte d\'Ivoire', 'Mali', 'Niger', 'Sénégal', 'Togo']" :key="e"
-                        class="text-xs px-2.5 py-1 rounded-full border border-white/10 text-blue-200/60"
-                        style="background: rgba(255,255,255,0.05)">
-                        {{ e }}
-                    </span>
-                </div>
-
-            </div>
-
-            <!-- Copyright bas -->
-            <div class="relative pb-6 text-center">
-                <p class="text-blue-400/40 text-xs">© {{ new Date().getFullYear() }} Coris Holding — DMC DataBox v1.0</p>
             </div>
         </div>
 
