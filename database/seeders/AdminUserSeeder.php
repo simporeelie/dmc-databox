@@ -18,4 +18,5 @@ class AdminUserSeeder extends Seeder
             'is_active' => true,
         ]);
     }
+    
 }

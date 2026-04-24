@@ -22,10 +22,14 @@ Route::middleware(['auth'])->group(function () {
 
     // Bibliothèque (tous les utilisateurs connectés)
     Route::get('/library', [DocumentController::class, 'index'])->name('library.index');
-    Route::get('/documents/export', [DocumentController::class, 'export'])->name('documents.export');
-    Route::post('/documents/download-zip', [DocumentController::class, 'downloadZip'])->name('documents.download-zip');
-    Route::get('/documents/{document}/download', [DocumentController::class, 'download'])->name('documents.download');
     Route::get('/documents/{document}/stream', [DocumentController::class, 'stream'])->name('documents.stream');
+
+    // Téléchargement (visiteur exclu)
+    Route::middleware('can:download')->group(function () {
+        Route::get('/documents/export', [DocumentController::class, 'export'])->name('documents.export');
+        Route::post('/documents/download-zip', [DocumentController::class, 'downloadZip'])->name('documents.download-zip');
+        Route::get('/documents/{document}/download', [DocumentController::class, 'download'])->name('documents.download');
+    });
 
     // Upload, édition et suppression (admin + dmc + rmc)
     Route::middleware('can:upload')->group(function () {

@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>DMC Databox — Proposition Commerciale</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --navy:#0f2d52;
+  --navy2:#1a4278;
+  --blue:#2563eb;
+  --blue2:#3b82f6;
+  --sky:#dbeafe;
+  --red:#dc2626;
+  --red2:#fee2e2;
+  --green:#16a34a;
+  --green2:#dcfce7;
+  --amber:#d97706;
+  --amber2:#fef3c7;
+  --gray50:#f8fafc;
+  --gray100:#f1f5f9;
+  --gray200:#e2e8f0;
+  --gray400:#94a3b8;
+  --gray500:#64748b;
+  --gray700:#334155;
+  --gray900:#0f172a;
+  --white:#fff;
+}
+
+body{font-family:'Inter',sans-serif;background:#1e293b;color:var(--gray900)}
+
+/* ─── SLIDE ──────────────────────────────────────── */
+.slide{
+  width:297mm;min-height:210mm;background:var(--white);
+  margin:0 auto 10px;display:flex;flex-direction:column;
+  position:relative;overflow:hidden;page-break-after:always;
+}
+
+/* ─── ACCENT BAR LEFT ─────────────────────────────── */
+.slide::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;
+  width:2.5mm;background:linear-gradient(180deg,var(--navy),var(--blue));
+  z-index:10;
+}
+
+/* ─── SLIDE COVER ─────────────────────────────────── */
+.s-cover{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 45%,var(--blue) 100%);
+  flex-direction:row;
+}
+.s-cover::before{display:none}
+
+.cov-l{
+  flex:1.3;display:flex;flex-direction:column;
+  justify-content:center;padding:14mm 8mm 14mm 18mm;
+}
+.cov-r{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;padding:10mm;
+  background:rgba(255,255,255,.06);
+  border-left:1px solid rgba(255,255,255,.12);
+}
+.cov-chip{
+  display:inline-flex;align-items:center;gap:5px;
+  background:rgba(255,255,255,.12);color:#93c5fd;
+  font-size:6.5pt;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;padding:3px 10px;border-radius:20px;
+  border:1px solid rgba(255,255,255,.2);margin-bottom:8mm;
+}
+.cov-logo{font-size:40pt;font-weight:900;color:#fff;line-height:1;letter-spacing:-2px}
+.cov-logo em{color:#60a5fa;font-style:normal}
+.cov-sub{font-size:10pt;color:#bfdbfe;margin-top:4mm;font-weight:300;line-height:1.6;max-width:105mm}
+.cov-line{width:18mm;height:3px;background:linear-gradient(90deg,#60a5fa,transparent);margin:7mm 0;border-radius:2px}
+.cov-by{font-size:7pt;color:rgba(255,255,255,.5)}
+.cov-by strong{color:#fff}
+.cov-date{
+  display:inline-block;background:rgba(255,255,255,.1);
+  color:#bfdbfe;font-size:7pt;padding:3px 10px;border-radius:20px;
+  margin-bottom:7mm;border:1px solid rgba(255,255,255,.15);
+}
+.cov-kpi{
+  display:grid;grid-template-columns:1fr 1fr;gap:4mm;
+  width:100%;
+}
+.kpi-box{
+  background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);
+  border-radius:8px;padding:4mm;text-align:center;
+}
+.kpi-box .kn{font-size:18pt;font-weight:900;color:#fff;line-height:1}
+.kpi-box .kl{font-size:6.5pt;color:#93c5fd;margin-top:1.5mm;line-height:1.3}
+.cov-foot{
+  position:absolute;bottom:5mm;left:18mm;right:10mm;
+  display:flex;justify-content:space-between;align-items:center;
+  border-top:1px solid rgba(255,255,255,.1);padding-top:3.5mm;
+}
+.cov-foot span{font-size:6.5pt;color:rgba(255,255,255,.35)}
+
+/* ─── SLIDE HEADER ────────────────────────────────── */
+.sh{
+  padding:5mm 10mm 5mm 20mm;
+  background:var(--navy);
+  display:flex;align-items:center;gap:4mm;
+}
+.sh h2{font-size:13pt;font-weight:800;color:#fff;letter-spacing:-.3px;flex:1}
+.sh h2 em{color:#93c5fd;font-style:normal}
+.sh .snum{font-size:6.5pt;color:rgba(255,255,255,.35);font-weight:700;letter-spacing:1px}
+.sh .ico{
+  width:8mm;height:8mm;border-radius:7px;
+  background:rgba(255,255,255,.12);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+}
+.sh .ico svg{width:4.5mm;height:4.5mm}
+
+/* ─── SLIDE BODY ──────────────────────────────────── */
+.sb{flex:1;padding:7mm 12mm 6mm 20mm}
+
+/* ─── SLIDE FOOTER ────────────────────────────────── */
+.sf{
+  padding:2.5mm 12mm 2.5mm 20mm;background:var(--gray50);
+  border-top:1px solid var(--gray200);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.sf span{font-size:6pt;color:var(--gray400)}
+.sf .pn{font-size:7pt;font-weight:800;color:var(--blue)}
+
+/* ─── INTRO BOX ───────────────────────────────────── */
+.intro{
+  background:var(--sky);border-left:3.5px solid var(--blue);
+  border-radius:0 7px 7px 0;padding:4mm 7mm;margin-bottom:5mm;
+}
+.intro p{font-size:8pt;color:var(--navy);line-height:1.55;font-weight:500}
+.intro p strong{color:var(--navy);font-weight:700}
+
+/* ─── GRID ────────────────────────────────────────── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:5mm}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4mm}
+.g4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:4mm}
+
+/* ─── CARD ────────────────────────────────────────── */
+.card{
+  background:var(--gray50);border:1px solid var(--gray200);
+  border-radius:8px;padding:5mm;
+}
+.card.cb{background:var(--sky);border-color:#bfdbfe}
+.card.cr{background:var(--red2);border-color:#fca5a5}
+.card.cg{background:var(--green2);border-color:#86efac}
+.card.ca{background:var(--amber2);border-color:#fcd34d}
+.card h3{font-size:8pt;font-weight:700;color:var(--gray900);margin-bottom:3mm}
+.card p,.card li{font-size:7pt;color:var(--gray700);line-height:1.55}
+.card ul{list-style:none}
+.card li{padding:1.5px 0;display:flex;align-items:flex-start;gap:4px}
+.card li::before{content:'›';color:var(--blue);font-weight:700;flex-shrink:0;margin-top:1px}
+
+/* ─── PAIN ────────────────────────────────────────── */
+.pain{
+  display:flex;gap:4mm;padding:4.5mm;
+  background:#fff;border:1px solid var(--gray200);
+  border-left:3.5px solid var(--red);border-radius:0 8px 8px 0;
+  margin-bottom:3mm;
+}
+.pain .pi{
+  width:8mm;height:8mm;border-radius:7px;
+  background:var(--red2);display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.pain .pi svg{width:4mm;height:4mm}
+.pain h4{font-size:8pt;font-weight:700;color:var(--gray900);margin-bottom:1.5mm}
+.pain p{font-size:7pt;color:var(--gray500);line-height:1.45}
+
+/* ─── SOL ─────────────────────────────────────────── */
+.sol{
+  display:flex;gap:4mm;padding:4.5mm;
+  background:#fff;border:1px solid var(--gray200);
+  border-left:3.5px solid var(--blue);border-radius:0 8px 8px 0;
+  margin-bottom:3mm;
+}
+.sol .si{
+  width:8mm;height:8mm;border-radius:7px;
+  background:var(--sky);display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.sol .si svg{width:4mm;height:4mm}
+.sol h4{font-size:8pt;font-weight:700;color:var(--gray900);margin-bottom:1.5mm}
+.sol p{font-size:7pt;color:var(--gray500);line-height:1.45}
+
+/* ─── STAT ────────────────────────────────────────── */
+.stat{
+  background:#fff;border:1px solid var(--gray200);border-radius:8px;
+  padding:5mm;text-align:center;box-shadow:0 1px 3px rgba(0,0,0,.05);
+}
+.stat .sn{font-size:20pt;font-weight:900;line-height:1;margin-bottom:2mm}
+.stat .sl{font-size:6.5pt;color:var(--gray500);line-height:1.35}
+
+/* ─── TABLE ───────────────────────────────────────── */
+.tbl{width:100%;border-collapse:separate;border-spacing:0;font-size:7.5pt}
+.tbl th{
+  padding:3.5mm 4mm;text-align:left;font-size:7pt;font-weight:700;
+  background:var(--navy);color:#fff;
+}
+.tbl th:first-child{border-radius:6px 0 0 0}
+.tbl th:last-child{border-radius:0 6px 0 0;text-align:right}
+.tbl th.tc{text-align:center}
+.tbl td{
+  padding:3mm 4mm;border-bottom:1px solid var(--gray200);
+  color:var(--gray700);vertical-align:middle;
+}
+.tbl td.tc{text-align:center}
+.tbl td.tr{text-align:right;font-weight:700}
+.tbl tr:nth-child(even) td{background:var(--gray50)}
+.tbl tr:last-child td{border-bottom:none}
+.tbl .ok{color:var(--green);font-weight:700;font-size:10pt}
+.tbl .no{color:var(--gray200);font-size:10pt}
+.tbl .ko{color:var(--red);font-weight:700;font-size:10pt}
+.tbl .foot td{
+  background:var(--navy);color:#fff;font-weight:700;
+  border-bottom:none;border-radius:0 0 6px 6px;
+}
+
+/* ─── BADGE ───────────────────────────────────────── */
+.badge{
+  display:inline-block;font-size:6pt;font-weight:700;
+  padding:2px 7px;border-radius:20px;letter-spacing:.5px;
+}
+.b-blue{background:var(--sky);color:var(--navy)}
+.b-green{background:var(--green2);color:#14532d}
+.b-red{background:var(--red2);color:#991b1b}
+.b-amber{background:var(--amber2);color:#92400e}
+.b-navy{background:var(--navy);color:#fff}
+
+/* ─── ROLE TABLE ──────────────────────────────────── */
+.role-grid{display:grid;grid-template-columns:32mm 1fr 1fr 1fr 1fr;gap:2.5mm;align-items:center;padding:3mm 0;border-bottom:1px solid var(--gray200);font-size:7.5pt}
+.role-grid:last-child{border-bottom:none}
+.rh{font-size:6.5pt;font-weight:700;color:var(--gray500);text-align:center}
+.rl{
+  background:var(--gray100);border-radius:6px;padding:2mm 3mm;
+  text-align:center;font-size:7pt;font-weight:700;color:var(--gray900);
+}
+.py{text-align:center;color:var(--green);font-size:11pt;font-weight:700}
+.pn-{text-align:center;color:var(--gray200);font-size:9pt}
+.pp{text-align:center;font-size:6.5pt;color:var(--gray500)}
+
+/* ─── VPS CARD ────────────────────────────────────── */
+.vps-card{
+  background:#fff;border:1.5px solid var(--gray200);
+  border-radius:10px;padding:5mm;display:flex;flex-direction:column;gap:3mm;
+  position:relative;overflow:hidden;
+}
+.vps-card.recommended{border-color:var(--blue);box-shadow:0 0 0 2px var(--sky)}
+.vps-card .rec-tag{
+  position:absolute;top:3mm;right:3mm;
+  background:var(--blue);color:#fff;font-size:5.5pt;font-weight:700;
+  padding:2px 7px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase;
+}
+.vps-card h3{font-size:9pt;font-weight:800;color:var(--navy)}
+.vps-card .vps-price{font-size:16pt;font-weight:900;color:var(--blue);line-height:1}
+.vps-card .vps-price span{font-size:8pt;font-weight:400;color:var(--gray400)}
+.vps-card ul{list-style:none}
+.vps-card ul li{font-size:6.5pt;color:var(--gray700);padding:1.5px 0;display:flex;align-items:center;gap:4px}
+.vps-card ul li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0}
+.vps-card .vps-tag{margin-top:2mm}
+
+/* ─── BUDGET TABLE ────────────────────────────────── */
+.bline{
+  display:grid;gap:2mm;align-items:center;
+  padding:3.5mm 4mm;border-radius:7px;margin-bottom:2mm;font-size:7.5pt;
+}
+.bline.bh{background:var(--navy);color:#fff;font-size:7pt;font-weight:700;grid-template-columns:1fr 28mm 28mm 28mm 32mm}
+.bline.bb{background:var(--gray50);border:1px solid var(--gray200);grid-template-columns:1fr 28mm 28mm 28mm 32mm}
+.bline.bt{background:var(--green2);border:2px solid #86efac;font-weight:700;grid-template-columns:1fr 28mm 28mm 28mm 32mm}
+.bline.bs{background:var(--sky);border:1px solid #93c5fd;grid-template-columns:1fr 28mm 28mm 28mm 32mm}
+.bline > div{text-align:center}
+.bline > div:first-child{text-align:left;color:var(--gray700);font-weight:500}
+.bline.bh > div{color:#fff}
+.bline.bh > div:first-child{color:#93c5fd}
+.bline.bt > div:first-child{color:var(--green);font-weight:800}
+.bline.bt > div:last-child{color:var(--green);font-size:9pt;font-weight:900}
+
+/* ─── TIMELINE ────────────────────────────────────── */
+.tl{display:flex;align-items:flex-start;gap:0;position:relative}
+.tl::before{
+  content:'';position:absolute;top:8.5mm;left:8.5mm;right:8.5mm;
+  height:2px;background:var(--gray200);z-index:0;
+}
+.tls{flex:1;display:flex;flex-direction:column;align-items:center;position:relative;z-index:1}
+.tld{
+  width:17mm;height:17mm;border-radius:50%;
+  background:var(--sky);border:2.5px solid var(--blue);
+  display:flex;align-items:center;justify-content:center;
+  font-size:10pt;font-weight:900;color:var(--navy);margin-bottom:3.5mm;
+}
+.tlp{font-size:5.5pt;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:2mm}
+.tls h4{font-size:7pt;font-weight:700;color:var(--gray900);text-align:center;margin-bottom:1.5mm}
+.tls p{font-size:6pt;color:var(--gray500);text-align:center;line-height:1.4}
+
+/* ─── CTA SLIDE ───────────────────────────────────── */
+.s-cta{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 50%,var(--blue) 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:10mm 20mm;
+}
+.s-cta::before{display:none}
+.cta-chip{
+  background:rgba(255,255,255,.12);color:#bfdbfe;font-size:6.5pt;
+  font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  padding:3px 12px;border-radius:20px;margin-bottom:7mm;
+  border:1px solid rgba(255,255,255,.18);
+}
+.cta-title{font-size:22pt;font-weight:900;color:#fff;line-height:1.1;margin-bottom:4mm;letter-spacing:-.5px}
+.cta-title em{color:#60a5fa;font-style:normal}
+.cta-sub{font-size:9pt;color:#bfdbfe;margin-bottom:8mm;max-width:130mm;line-height:1.6}
+.cta-btns{display:flex;gap:5mm;margin-bottom:10mm}
+.btn1{background:#fff;color:var(--navy);font-size:8pt;font-weight:700;padding:3.5mm 9mm;border-radius:7px}
+.btn2{background:transparent;color:#fff;font-size:8pt;font-weight:600;padding:3.5mm 9mm;border-radius:7px;border:1.5px solid rgba(255,255,255,.35)}
+.cta-row{display:flex;gap:10mm}
+.cta-c{display:flex;flex-direction:column;align-items:center;gap:1.5mm}
+.cta-c .ci{
+  width:9mm;height:9mm;background:rgba(255,255,255,.1);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+}
+.cta-c .ci svg{width:4.5mm;height:4.5mm}
+.cta-c .cl{font-size:6.5pt;color:rgba(255,255,255,.6)}
+.cta-c .cv{font-size:7.5pt;color:#fff;font-weight:600}
+
+/* ─── ARCH BOX ────────────────────────────────────── */
+.arch-box{
+  border:2px solid var(--gray200);border-radius:10px;
+  padding:5mm;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:2.5mm;
+}
+.arch-box .aico{
+  width:12mm;height:12mm;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;margin-bottom:1mm;
+}
+.arch-box h4{font-size:8pt;font-weight:700;color:var(--navy)}
+.arch-box p{font-size:6.5pt;color:var(--gray500);line-height:1.4}
+.arch-arrow{
+  display:flex;align-items:center;justify-content:center;
+  font-size:14pt;color:var(--gray400);flex-shrink:0;
+}
+
+/* ─── EXEC SUMMARY ────────────────────────────────── */
+.exec-num{
+  font-size:32pt;font-weight:900;color:var(--navy);
+  line-height:1;margin-bottom:2mm;
+}
+.exec-label{font-size:7.5pt;color:var(--gray500);line-height:1.4;max-width:40mm;text-align:center}
+.exec-vs{
+  display:flex;align-items:stretch;gap:5mm;
+  background:var(--gray50);border:1px solid var(--gray200);
+  border-radius:10px;padding:5mm;margin-top:5mm;
+}
+.exec-vs-col{flex:1;text-align:center}
+.exec-vs-col h4{font-size:8pt;font-weight:700;margin-bottom:3mm;padding-bottom:2mm;border-bottom:2px solid var(--gray200)}
+.exec-vs-col.bad h4{color:var(--red);border-color:#fca5a5}
+.exec-vs-col.good h4{color:var(--green);border-color:#86efac}
+.exec-vs-col ul{list-style:none}
+.exec-vs-col li{font-size:7pt;color:var(--gray700);padding:1.5px 0;text-align:left;display:flex;align-items:flex-start;gap:4px}
+.exec-vs-col li::before{font-weight:700;flex-shrink:0}
+.exec-vs-col.bad li::before{content:'✗';color:var(--red)}
+.exec-vs-col.good li::before{content:'✓';color:var(--green)}
+.exec-vs-div{width:1px;background:var(--gray200);flex-shrink:0;margin:0 2mm}
+
+/* ─── PRINT ───────────────────────────────────────── */
+@media print{
+  body{background:#fff}
+  .slide{margin:0;box-shadow:none}
+  @page{size:A4 landscape;margin:0}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+ SLIDE 1 — COVER
+═══════════════════════════════════════ -->
+<div class="slide s-cover">
+  <div class="cov-l">
+    <div class="cov-chip">
+      <svg width="8" height="8" viewBox="0 0 24 24" fill="#93c5fd"><circle cx="12" cy="12" r="10"/></svg>
+      Proposition Commerciale Confidentielle · 2025
+    </div>
+    <div class="cov-logo">DMC <em>DATA</em> BOX</div>
+    <div class="cov-line"></div>
+    <p class="cov-sub">La plateforme d'archivage numérique intelligente pour votre direction marketing et communication — conçue pour les groupes multi-filiales.</p>
+    <br/>
+    <p class="cov-by">Proposé par <strong>OXY Conseil</strong> — Agence Conseil en Communication</p>
+  </div>
+  <div class="cov-r">
+    <div class="cov-date">Avril 2025</div>
+    <div class="cov-kpi">
+      <div class="kpi-box"><div class="kn">100%</div><div class="kl">Solution propriétaire sans licence</div></div>
+      <div class="kpi-box"><div class="kn">-70%</div><div class="kl">Économie vs solution actuelle</div></div>
+      <div class="kpi-box"><div class="kn">4</div><div class="kl">Niveaux de filtres intelligents</div></div>
+      <div class="kpi-box"><div class="kn">∞</div><div class="kl">Durée de vie — vous le possédez</div></div>
+    </div>
+  </div>
+  <div class="cov-foot">
+    <span>Document confidentiel — usage exclusif du destinataire</span>
+    <span>OXY Conseil · www.oxyconseil.com</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+ SLIDE 2 — RÉSUMÉ EXÉCUTIF
+═══════════════════════════════════════ -->
+<div class="slide">
+  <div class="sh">
+    <div class="ico"><svg viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg></div>
+    <h2>Résumé exécutif — <em>L'essentiel en 30 secondes</em></h2>
+    <span class="snum">02 / 16</span>
+  </div>
+  <div class="sb">
+    <div class="intro">
+      <p>Votre solution actuelle d'archivage hébergée chez un prestataire externe (Odoo) vous coûte <strong>trop cher, ne vous appartient pas, et n'est plus maintenue</strong>. DMC Databox est une alternative sur-mesure, performante, économique et 100% propriétaire.</p>
+    </div>
+    <div class="g4" style="margin-bottom:5mm">
+      <div class="stat"><div class="sn" style="color:var(--red)">×3</div><div class="sl">Coût actuel vs. DMC Databox sur 3 ans</div></div>
+      <div class="stat"><div class="sn" style="color:var(--red)">0</div><div class="sl">Mise à jour effectuée sur la solution existante</div></div>
+      <div class="stat"><div class="sn" style="color:var(--green)">-70%</div><div class="sl">Réduction des coûts annuels d'exploitation</div></div>
+      <div class="stat"><div class="sn" style="color:var(--blue)">100%</div><div class="sl">Contrôle & propriété de votre solution</div></div>
+    </div>
+    <div class="exec-vs">
+      <div class="exec-vs-col bad">
+        <h4>❌ Situation actuelle (Odoo)</h4>
+        <ul>
+          <li>Vous payez une licence sans en être propriétaire</li>
+          <li>Hébergement imposé par le prestataire, coûteux</li>
+          <li>Solution non maintenue, fonctionnalités figées</li>
+          <li>Dépendance totale à un tiers externe</li>
+          <li>Aucune personnalisation possible</li>
+          <li>Risque de perte des données si prestataire ferme</li>
+        </ul>
+      </div>
+      <div class="exec-vs-div"></div>
+      <div class="exec-vs-col good">
+        <h4>✅ DMC Databox (Notre proposition)</h4>
+        <ul>
+          <li>Solution 100% propriétaire — vous la possédez</li>
+          <li>Hébergement au choix, optimisé et économique</li>
+          <li>Mises à jour continues et maintenance incluse</li>
+          <li>Autonomie totale sur vos données et archives</li>
+          <li>Personnalisation complète selon vos besoins</li>
+          <li>Code source livré, pérennité garantie</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="sf"><span>DMC Databox — Proposition Commerciale 2025</span><span class="pn">2</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+ SLIDE 3 — VOS DÉFIS
+═══════════════════════════════════════ -->
+<div class="slide">
+  <div class="sh">
+    <div class="ico"><svg viewBox="0 0 24 24" fill="white"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg></div>
+    <h2>Vos défis actuels — <em>Ce qui ne fonctionne plus</em></h2>
+    <span class="snum">03 / 16</span>
+  </div>
+  <div class="sb">
+    <div class="g2">
+      <div>
+        <div class="pain">
+          <div class="pi"><svg viewBox="0 0 24 24" fill="#dc2626"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg></div>
+          <div><h4>Coûts d'hébergement & licences excessifs</h4><p>La plateforme Odoo génère des frais annuels très élevés combinant licence logicielle + hébergement, sans que vous soyez propriétaire de quoi que ce soit. Ces coûts augmentent chaque année.</p></div>
+        </div>
+        <div class="pain">
+          <div class="pi"><svg viewBox="0 0 24 24" fill="#dc2626"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg></div>
+          <div><h4>Solution obsolète, non maintenue</h4><p>Depuis sa livraison, aucune mise à jour n'a été effectuée. Les bugs persistent, les fonctionnalités sont limitées, et la solution ne répond plus à vos besoins actuels.</p></div>
+        </div>
+      </div>
+      <div>
+        <div class="pain">
+          <div class="pi"><svg viewBox="0 0 24 24" fill="#dc2626"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z"/></svg></div>
+          <div><h4>Dépendance totale au prestataire</h4><p>Vos archives les plus précieuses — visuels, vidéos, documents institutionnels — sont hébergées chez un tiers. Si ce prestataire ferme ou augmente ses tarifs, vous n'avez aucun recours.</p></div>
+        </div>
+        <div class="pain">
+          <div class="pi"><svg viewBox="0 0 24 24" fill="#dc2626"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
+          <div><h4>Gestion des accès insuffisante</h4><p>Impossible de définir précisément qui voit quoi : un RMC d'une filiale peut accéder aux archives d'une autre. Aucune traçabilité des téléchargements ni des accès.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sf"><span>DMC Databox — Proposition Commerciale 2025</span><span class="pn">3</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+ SLIDE 4 — LA SOLUTION
+═══════════════════════════════════════ -->
+<div class="slide">
+  <div class="sh">
+    <div class="ico"><svg viewBox="0 0 24 24" fill="white"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+    <h2>La solution — <em>DMC Databox, votre bibliothèque numérique</em></h2>
+    <span class="snum">04 / 16</span>
+  </div>
+  <div class="sb">
+    <div class="intro">
+      <p><strong>DMC Databox</strong> est une plateforme web d'archivage numérique développée sur-mesure pour les directions marketing et communication de groupes multi-filiales. Elle centralise vos productions graphiques, audiovisuelles et documentaires dans un espace sécurisé, organisé et facilement accessible.</p>
+    </div>
+    <div class="g2">
+      <div>
+        <div class="sol">
+          <div class="si"><svg viewBox="0 0 24 24" fill="#2563eb"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg></div>
+          <div><h4>100% propriétaire — vous la possédez</h4><p>Le code source vous est livré dans son intégralité. Aucune licence récurrente, aucune dépendance à un éditeur tiers. Vous la faites évoluer comme vous le souhaitez.</p></div>
+        </div>
+        <div class="sol">
+          <div class="si"><svg viewBox="0 0 24 24" fill="#2563eb"><path d="M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z"/></svg></div>
+          <div><h4>Filtres intelligents en cascade (4 niveaux)</h4><p>Retrouvez n'importe quelle production en quelques secondes via des filtres par entité, année, filiale et catégorie. Chaque filtre affine dynamiquement les suivants.</p></div>
+        </div>
+        <div class="sol">
+          <div class="si"><svg viewBox="0 0 24 24" fill="#2563eb"><path d="M8 5v14l11-7z"/></svg></div>
+          <div><h4>Prévisualisation multi-formats sans téléchargement</h4><p>Visualisez images, vidéos HD, audios et PDF directement dans le navigateur. Streaming natif pour les vidéos et audios volumineux.</p></div>
+        </div>
+      </div>
+      <div>
+        <div class="sol">
+          <div class="si"><svg viewBox="0 0 24 24" fill="#2563eb"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg></div>
+          <div><h4>Téléchargement individuel & en lot (ZIP)</h4><p>Téléchargez un fichier ou sélectionnez plusieurs productions pour les exporter en une seule archive ZIP. Export des métadonnées en CSV pour Excel.</p></div>
+        </div>
+        <div class="sol">
+          <div class="si"><svg viewBox="0 0 24 24" fill="#2563eb"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg></div>
+          <div><h4>Gestion granulaire des accès utilisateurs</h4><p>4 rôles distincts : Administrateur, DMC, RMC (restreint à sa filiale) et Visiteur. Chacun accède uniquement à ce dont il a besoin, avec traçabilité complète.</p></div>
+        </div>
+        <div class="sol">
+          <div class="si"><svg viewBox="0 0 24 24" fill="#2563eb"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 14l-5-5 1.41-1.41L12 14.17l7.59-7.59L21 8l-9 9z"/></svg></div>
+          <div><h4>Dashboard & statistiques en temps réel</h4><p>Suivez l'activité de votre bibliothèque : documents par entité, téléchargements, connexions, demandes de fichiers, stockage utilisé.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sf"><span>DMC Databox — Proposition Commerciale 2025</span><span class="pn">4</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+ SLIDE 5 — FONCTIONNALITÉS DÉTAILLÉES
+═══════════════════════════════════════ -->
+<div class="slide">
+  <div class="sh">
+    <div class="ico"><svg viewBox="0 0 24 24" fill="white"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg></div>
+    <h2>Fonctionnalités — <em>Détail complet de la plateforme</em></h2>
+    <span class="snum">05 / 16</span>
+  </div>
+  <div class="sb">
+    <div class="g2">
+      <div>
+        <div class="card cb" style="margin-bottom:4mm">
+          <h3>📁 Gestion & Organisation des archives</h3>
+          <ul>
+            <li>Upload simple et par fragments (fichiers de plusieurs GB)</li>
+            <li>Formats supportés : JPG, PNG, GIF, SVG, MP4, AVI, MOV, MKV, MP3, WAV, AAC, PDF, Word, Excel, PowerPoint</li>
+            <li>Classement par : entité · filiale · catégorie · sous-catégorie · année</li>
+            <li>Édition des métadonnées après upload (titre, description, classement)</li>
+            <li>Suppression sécurisée avec contrôle strict des droits</li>
+          </ul>
+        </div>
+        <div class="card cb">
+          <h3>🔍 Recherche & Filtres avancés</h3>
+          <ul>
+            <li>Barre de recherche plein texte (titre + description) en temps réel</li>
+            <li>4 filtres en cascade avec multi-sélection simultanée</li>
+            <li>Compteur de documents par filtre actif</li>
+            <li>Vue grille (vignettes) ou liste selon préférence</li>
+            <li>Pagination optimisée (24 documents par page)</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="card cb" style="margin-bottom:4mm">
+          <h3>⬇ Téléchargement, Export & Streaming</h3>
+          <ul>
+            <li>Téléchargement individuel avec compteur d'accès par document</li>
+            <li>Sélection multiple (jusqu'à 50 fichiers) → export ZIP automatique</li>
+            <li>Export des métadonnées complètes en CSV (Excel)</li>
+            <li>Streaming vidéo/audio natif : navigation dans la timeline sans tout télécharger</li>
+            <li>Prévisualisation PDF intégrée dans le navigateur</li>
+          </ul>
+        </div>
+        <div class="card cb">
+          <h3>👥 Administration & Collaboration</h3>
+          <ul>
+            <li>4 rôles d'accès distincts et granulaires (Admin / DMC / RMC / Visiteur)</li>
+            <li>Création d'utilisateurs avec invitation par email sécurisé</li>
+            <li>Système de demandes de documents avec suivi de statut</li>
+            <li>Tableau de bord administrateur avec statistiques complètes</li>
+            <li>Gestion des entités, filiales, catégories et sous-catégories</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="sf"><span>DMC Databox — Proposition Commerciale 2025</span><span class="pn">5</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+ SLIDE 6 — SÉCURITÉ & RÔLES
+═══════════════════════════════════════ -->
+<div class="slide">
+  <div class="sh">
+    <div class="ico"><svg viewBox="0 0 24 24" fill="white"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg></div>
+    <h2>Sécurité & <em>Contrôle d'accès par rôles</em></h2>
+    <span class="snum">06 / 16</span>
+  </div>
+  <div class="sb">
+    <div class="intro"><p>Chaque utilisateur accède <strong>uniquement à ce que son rôle autorise</strong>. Un RMC de Burkina Faso ne voit que les archives de sa filiale. Un visiteur peut consulter sans jamais modifier. Chaque action est tracée.</p></div>
+    <div style="margin-bottom:5mm">
+      <div class="role-grid" style="background:var(--navy);border-radius:7px;padding:3mm 4mm">
+        <div style="font-size:7pt;font-weight:700;color:#93c5fd">Rôle</div>
+        <div class="rh" style="color:#93c5fd;border:none">Consulter</div>
+        <div class="rh" style="color:#93c5fd;border:none">Uploader</div>
+        <div class="rh" style="color:#93c5fd;border:none">Supprimer</div>
+        <div class="rh" style="color:#93c5fd;border:none">Administrer</div>
+      </div>
+      <div class="role-grid">
+        <div class="rl" style="background:#fef3c7;color:#92400e">Administrateur</div>
+        <div class="py">✓</div><div class="py">✓</div><div class="py">✓</div><div class="py">✓</div>
+      </div>
+      <div class="role-grid">
+        <div class="rl" style="background:var(--sky);color:var(--navy)">DMC</div>
+        <div class="py">✓</div><div class="py">✓</div><div class="py">✓</div><div class="pn-">—</div>
+      </div>
+      <div class="role-grid">
+        <div class="rl" style="background:var(--green2);color:#14532d">RMC</div>
+        <div class="pp">✓ (sa filiale)</div><div class="pn-">—</div><div class="pp">✓ (sa filiale)</div><div class="pn-">—</div>
+      </div>
+      <div class="role-grid">
+        <div class="rl">Visiteur</div>
+        <div class="py">✓</div><div class="pn-">—</div><div class="pn-">—</div><div class="pn-">—</div>
+      </div>
+    </div>
+    <div class="g3">
+      <div class="card"><h3>🔐 Authentification</h3><ul><li>Connexion sécurisée par identifiant + mot de passe chiffré (bcrypt)</li><li>Sessions avec expiration automatique</li><li>Invitation par email avec lien sécurisé à usage unique</li></ul></div>
+      <div class="card"><h3>🛡 Souveraineté des données</h3><ul><li>Hébergement sur votre propre VPS ou infrastructure</li><li>Aucune donnée ne transite chez un tiers non autorisé</li><li>Vous restez propriétaire absolu de vos archives</li></ul></div>
+      <div class="card"><h3>📋 Traçabilité</h3><ul><li>Compteur de téléchargements par document</li><li>Historique des dernières connexions par utilisateur</li><li>Suivi complet des demandes de documents</li></ul></div>
+    </div>
+  </div>
+  <div class="sf"><span>DMC Databox — Proposition Commerciale 2025</span><span class="pn">6</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+ SLIDE 7 — COMPARATIF AVANT / APRÈS
+═══════════════════════════════════════ -->
+<div class="slide">
+  <div class="sh">
+    <div class="ico"><svg viewBox="0 0 24 24" fill="white"><path d="M10 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h5v-2H5V5h5V3zm9 0h-5v2h5v14h-5v2h5c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg></div>
+    <h2>Comparatif — <em>Solution actuelle vs DMC Databox</em></h2>
+    <span class="snum">07 / 16</span>
+  </div>
+  <div class="sb">
+    <table class="tbl">
+      <thead>
+        <tr>
+          <th style="width:36%">Critère</th>
+          <th class="tc" style="background:#7f1d1d;width:32%">❌ Solution actuelle (Odoo)</th>
+          <th class="tc" style="background:#14532d;width:32%">✅ DMC Databox</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Propriété de la solution</td><td class="tc"><span class="ko">✗</span> Appartient au prestataire</td><td class="tc"><span class="ok">✓</span> Vous en êtes propriétaire</td></tr>
+        <tr><td>Licence annuelle</td><td class="tc"><span class="ko">✗</span> Facturée chaque année</td><td class="tc"><span class="ok">✓</span> Aucune — investissement unique</td></tr>
+        <tr><td>Choix de l'hébergement</td><td class="tc"><span class="ko">✗</span> Imposé par le prestataire</td><td class="tc"><span class="ok">✓</span> Votre VPS, votre choix</td></tr>
+        <tr><td>Mises à jour</td><td class="tc"><span class="ko">✗</span> Inexistantes depuis la livraison</td><td class="tc"><span class="ok">✓</span> Continues et incluses</td></tr>
+        <tr><td>Formats supportés</td><td class="tc"><span class="ko">✗</span> Documents principalement</td><td class="tc"><span class="ok">✓</span> Images · Vidéos · Audio · PDF · Office</td></tr>
+        <tr><td>Prévisualisation en ligne</td><td class="tc"><span class="ko">✗</span> Non disponible</td><td class="tc"><span class="ok">✓</span> Tous formats sans téléchargement</td></tr>
+        <tr><td>Streaming vidéo/audio</td><td class="tc"><span class="ko">✗</span> Absent</td><td class="tc"><span class="ok">✓</span> Natif avec contrôle de la timeline</td></tr>
+        <tr><td>Gestion des rôles</td><td class="tc"><span class="ko">✗</span> Basique</td><td class="tc"><span class="ok">✓</span> 4 rôles granulaires et paramétrables</td></tr>
+        <tr><td>Upload de gros fichiers</td><td class="tc"><span class="ko">✗</span> Limité (timeout fréquents)</td><td class="tc"><span class="ok">✓</span> Par fragments — fichiers de plusieurs GB</td></tr>
+        <tr><td>Personnalisation</td><td class="tc"><span class="ko">✗</span> Contrainte par Odoo</td><td class="tc"><span class="ok">✓</span> Illimitée — code source ouvert</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="sf"><span>DMC Databox — Proposition Commerciale 2025</span><span class="pn">7</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+ SLIDE 8 — ARCHITECTURE TECHNIQUE
+═══════════════════════════════════════ -->
+<div class="slide">
+  <div class="sh">
+    <div class="ico"><svg viewBox="0 0 24 24" fill="white"><path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/></svg></div>
+    <h2>Architecture technique — <em>Moderne, robuste & évolutive</em></h2>
+    <span class="snum">08 / 16</span>
+  </div>
+  <div class="sb">
+    <div class="intro"><p>DMC Databox est construite sur des technologies <strong>100% open-source, éprouvées et pérennes</strong>. Aucune dépendance à un éditeur propriétaire. La solution fonctionne sur n'importe quel serveur Linux standard.</p></div>
+    <div class="g2" style="margin-bottom:5mm">
+      <div>
+        <div class="card cb" style="margin-bottom:4mm">
+          <h3>⚙ Backend — Moteur applicatif</h3>
+          <ul>
+            <li><strong>Laravel (PHP 8.3)</strong> — Framework professionnel, sécurisé, utilisé par des milliers d'entreprises mondiales</li>
+            <li>API sécurisée avec gestion fine des autorisations</li>
+            <li>Upload par fragments (chunked upload) pour les gros fichiers</li>
+            <li>Streaming vidéo/audio avec gestion des plages (Range Requests)</li>
+            <li>Génération ZIP, export CSV, traitement asynchrone</li>
+          </ul>
+        </div>
+        <div class="card cb">
+          <h3>🗄 Base de données & Stockage</h3>
+          <ul>
+            <li><strong>MySQL</strong> — Base de données enterprise, fiable et performante</li>
+            <li>Stockage des fichiers sur VPS local ou Object Storage S3</li>
+            <li>Structure organisée : entité / année / fichier</li>
+            <li>Statistiques et compteurs en temps réel</li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <div class="card cb" style="margin-bottom:4mm">
+          <h3>🖥 Frontend — Interface utilisateur</h3>
+          <ul>
+            <li><strong>Vue.js 3 + Inertia.js</strong> — Interface réactive, navigation instantanée sans rechargement</li>
+            <li><strong>Tailwind CSS</strong> — Design professionnel et entièrement personnalisable</li>
+            <li>Responsive desktop & tablette</li>
+            <li>Mode grille / liste, navigation clavier dans la visionneuse</li>
+          </ul>
+        </div>
+        <div class="card cb">
+          <h3>🚀 Déploiement & Hébergement</h3>
+          <ul>
+            <li>Compatible tout serveur Linux (Ubuntu, Debian, CentOS)</li>
+            <li>Déploiement rapide en moins d'une journée</li>
+            <li>Mises à jour sans interruption de service</li>
+            <li>Compatible hébergement VPS, dédié ou cloud (AWS, OVH…)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:3mm;background:var(--gray50);border:1px solid var(--gray200);border-radius:8px;padding:4mm 6mm;">
+      <div class="arch-box" style="flex:1;border-color:var(--blue2)">
+        <div class="aico" style="background:var(--sky)"><svg viewBox="0 0 24 24" fill="#2563eb" width="20"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg></div>
+        <h4>Navigateur</h4><p>Interface Vue.js Tailwind</p>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box" style="flex:1;border-color:var(--navy)">
+        <div class="aico" style="background:var(--navy);color:#fff"><svg viewBox="0 0 24 24" fill="white" width="20"><path d="M20 18c1.1 0 1.99-.9 1.99-2L22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg></div>
+        <h4>VPS Linux</h4><p>Laravel + Nginx + PHP</p>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box" style="flex:1;border-color:#16a34a">
+        <div class="aico" style="background:var(--green2)"><svg viewBox="0 0 24 24" fill="#16a34a" width="20"><path d="M20 6h-2.18c.07-.44.18-.88.18-1.35C18 2.53 15.48 0 12.35 0c-1.7 0-3.21.75-4.25 1.95L7 3 5.9 1.95C4.86.75 3.35 0 1.65 0H1.5C-.6 0-2 1.43-2 3.19 0 4.5.98 5.68 2.3 5.95L4 6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM9 17.13V14h6v3.13c0 .44-.5.68-.85.41L12 16l-2.15 1.54c-.35.25-.85.02-.85-.41z"/></svg></div>
+        <h4>MySQL</h4><p>Base de données</p>
+      </div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box" style="flex:1;border-color:var(--amber)">
+        <div class="aico" style="background:var(--amber2)"><svg viewBox="0 0 24 24" fill="#d97706" width="20"><path d="M2 20h20v-4H2v4zm2-3h2v2H4v-2zM2 4v4h20V4H2zm4 3H4V5h2v2zm-4 7h20v-4H2v4zm2-3h2v2H4v-2z"/></svg></div>
+        <h4>Stockage fichiers</h4><p>VPS local ou Object Storage</p>
+      </div>
+    </div>
+  </div>
+  <div class="sf"><span>DMC Databox — Proposition Commerciale 2025</span><span class="pn">8</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+ SLIDE 9 — RECOMMANDATION VPS
+═══════════════════════════════════════ -->
+<div class="slide">
+  <div class="sh">
+    <div class="ico"><svg viewBox="0 0 24 24" fill="white"><path d="M20 18c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2H0v2h24v-2h-4zM4 6h16v10H4V6z"/></svg></div>
+    <h2>Hébergement VPS — <em>Notre recommandation détaillée</em></h2>
+    <span class="snum">09 / 16</span>
+  </div>
+  <div class="sb">
+    <div class="intro"><p>Vos archives contiennent des <strong>fichiers volumineux</strong> (vidéos HD, livres de marque, dossiers graphiques). Le VPS choisi doit garantir <strong>espace suffisant, performances et fiabilité</strong>. Voici les 4 meilleures options du marché comparées.</p></div>
+    <div class="g4" style="margin-bottom:5mm">
+      <!-- Contabo -->
+      <div class="vps-card">
+        <h3>Contabo</h3>
+        <div class="vps-price">€14,99<span>/mois</span></div>
+        <ul>
+          <li>4 vCPU · 8 GB RAM</li>
+          <li>200 GB SSD NVMe</li>
+          <li>32 TB trafic inclus</li>
+          <li>Serveurs Allemagne/USA</li>
+          <li>+1 TB Object Storage</li>
+        </ul>
+        <div class="vps-tag"><span class="badge b-amber">Budget — Bon rapport stockage/prix</span></div>
+      </div>
+      <!-- Hetzner -->
+      <div class="vps-card recommended">
+        <div class="rec-tag">⭐ Recommandé</div>
+        <h3>Hetzner Cloud</h3>
+        <div class="vps-price">€11,90<span>/mois</span></div>
+        <ul>
+          <li>4 vCPU AMD · 8 GB RAM</li>
+          <li>160 GB SSD NVMe</li>
+          <li>20 TB trafic inclus</li>
+          <li>Serveurs Allemagne/Finlande</li>
+          <li>+ Volume Storage évolutif</li>
+        </ul>
+        <div class="vps-tag"><span class="badge b-blue">Meilleur rapport qualité/prix</span></div>
+      </div>
+      <!-- OVHcloud -->
+      <div class="vps-card recommended" style="border-color:var(--navy)">
+        <div class="rec-tag" style="background:var(--navy)">🏆 Premium</div>
+        <h3>OVHcloud</h3>
+        <div class="vps-price">€14,40<span>/mois</span></div>
+        <ul>
+          <li>4 vCPU · 8 GB RAM</li>
+          <li>160 GB SSD NVMe</li>
+          <li>Serveurs France (Paris)</li>
+          <li>Support FR inclus</li>
+          <li>+ Object Storage S3</li>
+        </ul>
+        <div class="vps-tag"><span class="badge b-navy">Meilleure latence Afrique</span></div>
+      </div>
+      <!-- DigitalOcean -->
+      <div class="vps-card">
+        <h3>DigitalOcean</h3>
+        <div class="vps-price">$48<span>/mois</span></div>
+        <ul>
+          <li>4 vCPU · 8 GB RAM</li>
+          <li>160 GB SSD</li>
+          <li>5 TB trafic inclus</li>
+          <li>Serveurs Amsterdam</li>
+          <li>+ Spaces 250GB: $5</li>
+        </ul>
+        <div class="vps-tag"><span class="badge b-red">Plus cher — interface simple</span></div>
+      </div>
+    </div>
+    <div class="card ca">
+      <h3>⚠ Important : Gestion des fichiers volumineux (vidéos HD, gros dossiers)</h3>
+      <p style="font-size:7pt;line-height:1.6;color:var(--gray700)">
+        Pour des archives contenant des <strong>vidéos HD, des dossiers graphiques lourds ou des archives de plusieurs GB</strong>, nous recommandons une architecture en 2 parties : le <strong>VPS</strong> héberge l'application et la base de données, tandis qu'un <strong>Object Storage séparé</strong> (Hetzner Storage Box 1TB à €9,90/mois ou OVHcloud Object Storage) stocke les fichiers médias. Cette approche permet de <strong>faire évoluer le stockage indépendamment</strong> du serveur, sans migration. Capacité recommandée au démarrage : <strong>1 TB</strong> (évolutif à la demande).
+      </p>
+    </div>
+  </div>
+  <div class="sf"><span>DMC Databox — Proposition Commerciale 2025</span><span class="pn">9</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+ SLIDE 10 — DIMENSIONNEMENT STOCKAGE
+═══════════════════════════════════════ -->
+<div class="slide">
+  <div class="sh">
+    <div class="ico"><svg viewBox="0 0 24 24" fill="white"><path d="M2 20h20v-4H2v4zm2-3h2v2H4v-2zM2 4v4h20V4H2zm4 3H4V5h2v2zm-4 7h20v-4H2v4zm2-3h2v2H4v-2z"/></svg></div>
+    <h2>Dimensionnement du stockage — <em>Estimation pour vos archives</em></h2>
+    <span class="snum">10 / 16</span>
+  </div>
+  <div class="sb">
+    <div class="intro"><p>Le dimensionnement du stockage dépend du <strong>volume de vos archives actuelles et futures</strong>. Voici une estimation réaliste basée sur les types de fichiers DMC d'un groupe multi-filiales comme le vôtre.</p></div>
+
+    <table class="tbl" style="margin-bottom:5mm">
+      <thead>
+        <tr>
+          <th>Type de fichier</th>
+          <th class="tc">Poids moyen</th>
+          <th class="tc">Volume estimé / an / entité</th>
+          <th class="tc">Total (5 entités × 6 ans)</th>
+          <th class="tc">Espace estimé</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Visuels institutionnels (JPG/PNG)</td><td class="tc">5–20 MB</td><td class="tc">~200 fichiers</td><td class="tc">~6 000 fichiers</td><td class="tc" style="color:var(--blue);font-weight:700">~60–120 GB</td></tr>
+        <tr><td>Vidéos (spots, publi-reportages MP4)</td><td class="tc">200 MB – 2 GB</td><td class="tc">~30 vidéos</td><td class="tc">~900 vidéos</td><td class="tc" style="color:var(--red);font-weight:700">~200 GB – 1,5 TB</td></tr>
+        <tr><td>Audios (spots, messages DG)</td><td class="tc">5–30 MB</td><td class="tc">~50 fichiers</td><td class="tc">~1 500 fichiers</td><td class="tc" style="color:var(--blue);font-weight:700">~8–45 GB</td></tr>
+        <tr><td>Documents PDF / Office</td><td class="tc">1–50 MB</td><td class="tc">~100 fichiers</td><td class="tc">~3 000 fichiers</td><td class="tc" style="color:var(--blue);font-weight:700">~3–150 GB</td></tr>
+        <tr class="foot">
+          <td>TOTAL ESTIMÉ (scénario moyen)</td>
+          <td class="tc">—</td>
+          <td class="tc">—</td>
+          <td class="tc">~11 400 fichiers</td>
+          <td class="tc">⚡ 500 GB – 2 TB</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="g3">
+      <div class="card cg">
+        <h3>✅ Notre recommandation</h3>
+        <ul>
+          <li><strong>Démarrage :</strong> 1 TB Object Storage</li>
+          <li>Évolutif à la demande sans migration</li>
+          <li>Hetzner Storage Box 1TB : ~9,90€/mois</li>
+          <li>Prévoir ×2 pour les sauvegardes automatiques</li>
+        </ul>
+      </div>
+      <div class="card cb">
+        <h3>🏗 Architecture optimale</h3>
+        <ul>
+          <li>VPS : application + base de données</li>
+          <li>Object Storage séparé : tous les fichiers médias</li>
+          <li>Sauvegarde quotidienne automatisée</li>
+          <li>Coût évolutif selon volume réel</li>
+        </ul>
+      </div>
+      <div class="card ca">
+        <h3>⚠ À anticiper</h3>
+        <ul>
+          <li>Migrer les archives existantes dès le départ</li>
+          <li>Compresser les vidéos pour le web (H.264)</li>
+          <li>Prévoir 1,5× votre volume actuel pour la croissance</li>
+          <li>Audit du stock existant recommandé avant migration</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="sf"><span>DMC Databox — Proposition Commerciale 2025</span><span class="pn">10</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+ SLIDE 11 — PLAN BUDGÉTAIRE COMPLET
+═══════════════════════════════════════ -->
+<div class="slide">
+  <div class="sh">
+    <div class="ico"><svg viewBox="0 0 24 24" fill="white"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg></div>
+    <h2>Plan budgétaire — <em>Détail complet des coûts</em></h2>
+    <span class="snum">11 / 16</span>
+  </div>
+  <div class="sb">
+    <div style="margin-bottom:5mm">
+      <div style="font-size:8pt;font-weight:700;color:var(--navy);margin-bottom:3mm;padding-bottom:2mm;border-bottom:2px solid var(--navy)">A — INVESTISSEMENT INITIAL (coût unique au démarrage)</div>
+      <div class="bline bh" style="grid-template-columns:1fr 45mm 45mm 55mm"><div>Poste</div><div>Offre Essentielle</div><div>Offre Standard</div><div>Offre Premium</div></div>
+      <div class="bline bb" style="grid-template-columns:1fr 45mm 45mm 55mm"><div>Déploiement, configuration & personnalisation</div><div style="color:var(--blue);font-weight:700">500 000 FCFA</div><div style="color:var(--blue);font-weight:700">800 000 FCFA</div><div style="color:var(--blue);font-weight:700">1 200 000 FCFA</div></div>
+      <div class="bline bb" style="grid-template-columns:1fr 45mm 45mm 55mm"><div>Migration des archives existantes</div><div>Inclus</div><div>Inclus</div><div>Inclus</div></div>
+      <div class="bline bb" style="grid-template-columns:1fr 45mm 45mm 55mm"><div>Formation des équipes (Admin + Utilisateurs)</div><div>1 session</div><div>2 sessions</div><div>3 sessions + support</div></div>
+      <div class="bline bb" style="grid-template-columns:1fr 45mm 45mm 55mm"><div>Livraison du code source complet + documentation</div><div style="color:var(--green);font-weight:700">✓ Inclus</div><div style="color:var(--green);font-weight:700">✓ Inclus</div><div style="color:var(--green);font-weight:700">✓ Inclus</div></div>
+    </div>
+
+    <div style="margin-bottom:5mm">
+      <div style="font-size:8pt;font-weight:700;color:var(--navy);margin-bottom:3mm;padding-bottom:2mm;border-bottom:2px solid var(--navy)">B — COÛTS ANNUELS RÉCURRENTS (hébergement + maintenance)</div>
+      <div class="bline bh" style="grid-template-columns:1fr 45mm 45mm 55mm"><div>Poste</div><div>Offre Essentielle</div><div>Offre Standard</div><div>Offre Premium</div></div>
+      <div class="bline bb" style="grid-template-columns:1fr 45mm 45mm 55mm"><div>VPS (Hetzner CPX31 ou OVHcloud Comfort) — serveur</div><div>~90 000 FCFA/an</div><div>~100 000 FCFA/an</div><div>~120 000 FCFA/an</div></div>
+      <div class="bline bb" style="grid-template-columns:1fr 45mm 45mm 55mm"><div>Object Storage 1 TB (Hetzner Storage Box)</div><div>~78 000 FCFA/an</div><div>~78 000 FCFA/an</div><div>~156 000 FCFA/an (2TB)</div></div>
+      <div class="bline bb" style="grid-template-columns:1fr 45mm 45mm 55mm"><div>Nom de domaine + certificat SSL</div><div>~15 000 FCFA/an</div><div>~15 000 FCFA/an</div><div>~15 000 FCFA/an</div></div>
+      <div class="bline bb" style="grid-template-columns:1fr 45mm 45mm 55mm"><div>Maintenance & support technique annuel</div><div>Non inclus</div><div>200 000 FCFA/an</div><div>400 000 FCFA/an</div></div>
+      <div class="bline bt" style="grid-template-columns:1fr 45mm 45mm 55mm"><div>💰 TOTAL ANNUEL (hébergement + maintenance)</div><div>~183 000 FCFA</div><div>~393 000 FCFA</div><div>~691 000 FCFA</div></div>
+    </div>
+
+    <div class="card ca">
+      <h3>📊 Comparaison avec la solution actuelle</h3>
+      <p style="font-size:7pt;color:var(--gray700);line-height:1.6">
+        À titre indicatif : une solution Odoo hébergée chez un prestataire coûte généralement entre <strong>1 500 000 et 4 000 000 FCFA/an</strong> (licence + hébergement), sans que vous en soyez propriétaire. Avec DMC Databox en Offre Standard, vous passez à <strong>~393 000 FCFA/an</strong> après l'investissement initial. <strong>Économie estimée : 75 à 85% sur les coûts annuels.</strong>
+      </p>
+    </div>
+  </div>
+  <div class="sf"><span>DMC Databox — Proposition Commerciale 2025</span><span class="pn">11</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+ SLIDE 12 — ROI SUR 3 ANS
+═══════════════════════════════════════ -->
+<div class="slide">
+  <div class="sh">
+    <div class="ico"><svg viewBox="0 0 24 24" fill="white"><path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/></svg></div>
+    <h2>Retour sur investissement — <em>Projection sur 3 ans</em></h2>
+    <span class="snum">12 / 16</span>
+  </div>
+  <div class="sb">
+    <div class="intro"><p>En comparant le coût total de possession de votre solution actuelle avec DMC Databox sur 3 ans, le choix est sans appel. <strong>Dès la 2ème année, l'économie cumulée dépasse le coût de déploiement initial.</strong></p></div>
+
+    <table class="tbl" style="margin-bottom:5mm">
+      <thead>
+        <tr>
+          <th>Postes de coûts</th>
+          <th class="tc" style="background:#7f1d1d">Solution actuelle (3 ans)</th>
+          <th class="tc" style="background:#14532d">DMC Databox — Offre Standard (3 ans)</th>
+          <th class="tc" style="background:var(--navy)">Économie réalisée</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Licence logicielle annuelle</td><td class="tc" style="color:var(--red);font-weight:700">~3 000 000 FCFA</td><td class="tc" style="color:var(--green);font-weight:700">0 FCFA</td><td class="tc" style="color:var(--green);font-weight:700">3 000 000 FCFA</td></tr>
+        <tr><td>Hébergement annuel (×3)</td><td class="tc" style="color:var(--red);font-weight:700">~1 500 000 FCFA</td><td class="tc" style="color:var(--green);font-weight:700">~279 000 FCFA</td><td class="tc" style="color:var(--green);font-weight:700">~1 221 000 FCFA</td></tr>
+        <tr><td>Maintenance & support (×3)</td><td class="tc" style="color:var(--red);font-weight:700">~600 000 FCFA</td><td class="tc" style="color:var(--green);font-weight:700">~600 000 FCFA</td><td class="tc">0 FCFA</td></tr>
+        <tr><td>Investissement initial (unique)</td><td class="tc">0 FCFA</td><td class="tc" style="color:var(--blue);font-weight:700">800 000 FCFA</td><td class="tc" style="color:var(--red);font-weight:700">- 800 000 FCFA</td></tr>
+        <tr class="foot">
+          <td>💰 TOTAL SUR 3 ANS</td>
+          <td class="tc" style="color:#fca5a5">~5 100 000 FCFA</td>
+          <td class="tc" style="color:#86efac">~1 679 000 FCFA</td>
+          <td class="tc" style="color:#86efac;font-size:10pt">~3 421 000 FCFA économisés</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="g4">
+      <div class="stat"><div class="sn" style="color:var(--green)">-67%</div><div class="sl">Réduction du coût total sur 3 ans</div></div>
+      <div class="stat"><div class="sn" style="color:var(--blue)">An 2</div><div class="sl">Dès la 2ème année, vous êtes positif</div></div>
+      <div class="stat"><div class="sn" style="color:var(--green)">3,4M</div><div class="sl">FCFA économisés sur 3 ans</div></div>
+      <div class="stat"><div class="sn" style="color:var(--navy)">∞</div><div class="sl">Pas de coût de licence les années suivantes</div></div>
+    </div>
+  </div>
+  <div class="sf"><span>DMC Databox — Proposition Commerciale 2025</span><span class="pn">12</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+ SLIDE 13 — LES 3 OFFRES
+═══════════════════════════════════════ -->
+<div class="slide">
+  <div class="sh">
+    <div class="ico"><svg viewBox="0 0 24 24" fill="white"><path d="M11.5 2C6.81 2 3 5.81 3 10.5S6.81 19 11.5 19h.5v3c4.86-2.34 8-7 8-11.5C20 5.81 16.19 2 11.5 2zm1 14.5h-2v-2h2v2zm0-4h-2c0-3.25 3-3 3-5 0-1.1-.9-2-2-2s-2 .9-2 2h-2c0-2.21 1.79-4 4-4s4 1.79 4 4c0 2.5-3 2.75-3 5z"/></svg></div>
+    <h2>Nos offres — <em>Choisissez la formule adaptée à vos besoins</em></h2>
+    <span class="snum">13 / 16</span>
+  </div>
+  <div class="sb">
+    <div class="g3">
+      <!-- ESSENTIELLE -->
+      <div style="background:#fff;border:1.5px solid var(--gray200);border-radius:12px;padding:6mm;display:flex;flex-direction:column;gap:3mm">
+        <div><span class="badge b-amber" style="font-size:7pt;padding:3px 10px">ESSENTIELLE</span></div>
+        <div style="font-size:22pt;font-weight:900;color:var(--amber);line-height:1">500 000<span style="font-size:9pt;color:var(--gray400);font-weight:400"> FCFA</span></div>
+        <div style="font-size:7pt;color:var(--gray500)">+ ~183 000 FCFA/an (hébergement)</div>
+        <hr style="border:none;border-top:1px solid var(--gray200)"/>
+        <ul style="list-style:none">
+          <li style="font-size:7pt;color:var(--gray700);padding:2px 0;display:flex;gap:5px"><span style="color:var(--green);font-weight:700">✓</span> Déploiement & configuration</li>
+          <li style="font-size:7pt;color:var(--gray700);padding:2px 0;display:flex;gap:5px"><span style="color:var(--green);font-weight:700">✓</span> Migration archives existantes</li>
+          <li style="font-size:7pt;color:var(--gray700);padding:2px 0;display:flex;gap:5px"><span style="color:var(--green);font-weight:700">✓</span> 1 session de formation</li>
+          <li style="font-size:7pt;color:var(--gray700);padding:2px 0;display:flex;gap:5px"><span style="color:var(--green);font-weight:700">✓</span> Code source livré</li>
+          <li style="font-size:7pt;color:var(--gray700);padding:2px 0;display:flex;gap:5px"><span style="color:var(--green);font-weight:700">✓</span> VPS + 1 TB stockage</li>
+          <li style="font-size:7pt;color:var(--gray400);padding:2px 0;display:flex;gap:5px"><span>✗</span> Maintenance annuelle</li>
+          <li style="font-size:7pt;color:var(--gray400);padding:2px 0;display:flex;gap:5px"><span>✗</span> Support prioritaire</li>
+        </ul>
+        <div style="font-size:6.5pt;color:var(--gray500);font-style:italic">Idéal pour démarrer rapidement</div>
+      </div>
+      <!-- STANDARD -->
+      <div style="background:var(--navy);border:2px solid var(--blue);border-radius:12px;padding:6mm;display:flex;flex-direction:column;gap:3mm;position:relative">
+        <div style="position:absolute;top:-3mm;left:50%;transform:translateX(-50%);background:var(--blue);color:#fff;font-size:6pt;font-weight:700;padding:2px 12px;border-radius:20px;letter-spacing:1px;white-space:nowrap">⭐ LE PLUS POPULAIRE</div>
+        <div><span class="badge" style="background:var(--blue);color:#fff;font-size:7pt;padding:3px 10px">STANDARD</span></div>
+        <div style="font-size:22pt;font-weight:900;color:#60a5fa;line-height:1">800 000<span style="font-size:9pt;color:rgba(255,255,255,.5);font-weight:400"> FCFA</span></div>
+        <div style="font-size:7pt;color:#93c5fd">+ ~393 000 FCFA/an (hébergement + maintenance)</div>
+        <hr style="border:none;border-top:1px solid rgba(255,255,255,.15)"/>
+        <ul style="list-style:none">
+          <li style="font-size:7pt;color:#e2e8f0;padding:2px 0;display:flex;gap:5px"><span style="color:#86efac;font-weight:700">✓</span> Tout de l'offre Essentielle</li>
+          <li style="font-size:7pt;color:#e2e8f0;padding:2px 0;display:flex;gap:5px"><span style="color:#86efac;font-weight:700">✓</span> 2 sessions de formation</li>
+          <li style="font-size:7pt;color:#e2e8f0;padding:2px 0;display:flex;gap:5px"><span style="color:#86efac;font-weight:700">✓</span> Maintenance annuelle incluse</li>
+          <li style="font-size:7pt;color:#e2e8f0;padding:2px 0;display:flex;gap:5px"><span style="color:#86efac;font-weight:700">✓</span> Mises à jour régulières</li>
+          <li style="font-size:7pt;color:#e2e8f0;padding:2px 0;display:flex;gap:5px"><span style="color:#86efac;font-weight:700">✓</span> Support email 5j/7</li>
+          <li style="font-size:7pt;color:#e2e8f0;padding:2px 0;display:flex;gap:5px"><span style="color:#86efac;font-weight:700">✓</span> VPS + 1 TB stockage</li>
+        </ul>
+        <div style="font-size:6.5pt;color:#93c5fd;font-style:italic">Recommandé — équilibre parfait</div>
+      </div>
+      <!-- PREMIUM -->
+      <div style="background:#fff;border:1.5px solid var(--navy);border-radius:12px;padding:6mm;display:flex;flex-direction:column;gap:3mm">
+        <div><span class="badge b-navy" style="font-size:7pt;padding:3px 10px">PREMIUM</span></div>
+        <div style="font-size:22pt;font-weight:900;color:var(--navy);line-height:1">1 200 000<span style="font-size:9pt;color:var(--gray400);font-weight:400"> FCFA</span></div>
+        <div style="font-size:7pt;color:var(--gray500)">+ ~691 000 FCFA/an (hébergement 2TB + maintenance)</div>
+        <hr style="border:none;border-top:1px solid var(--gray200)"/>
+        <ul style="list-style:none">
+          <li style="font-size:7pt;color:var(--gray700);padding:2px 0;display:flex;gap:5px"><span style="color:var(--green);font-weight:700">✓</span> Tout de l'offre Standard</li>
+          <li style="font-size:7pt;color:var(--gray700);padding:2px 0;display:flex;gap:5px"><span style="color:var(--green);font-weight:700">✓</span> 3 sessions formation + documentation</li>
+          <li style="font-size:7pt;color:var(--gray700);padding:2px 0;display:flex;gap:5px"><span style="color:var(--green);font-weight:700">✓</span> 2 TB stockage (vidéos HD)</li>
+          <li style="font-size:7pt;color:var(--gray700);padding:2px 0;display:flex;gap:5px"><span style="color:var(--green);font-weight:700">✓</span> Support prioritaire 7j/7</li>
+          <li style="font-size:7pt;color:var(--gray700);padding:2px 0;display:flex;gap:5px"><span style="color:var(--green);font-weight:700">✓</span> Évolutions personnalisées</li>
+          <li style="font-size:7pt;color:var(--gray700);padding:2px 0;display:flex;gap:5px"><span style="color:var(--green);font-weight:700">✓</span> Sauvegarde quotidienne automatisée</li>
+        </ul>
+        <div style="font-size:6.5pt;color:var(--gray500);font-style:italic">Pour les groupes avec grands volumes</div>
+      </div>
+    </div>
+  </div>
+  <div class="sf"><span>DMC Databox — Proposition Commerciale 2025</span><span class="pn">13</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+ SLIDE 14 — PLAN DE DÉPLOIEMENT
+═══════════════════════════════════════ -->
+<div class="slide">
+  <div class="sh">
+    <div class="ico"><svg viewBox="0 0 24 24" fill="white"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg></div>
+    <h2>Plan de déploiement — <em>De la décision à la mise en production</em></h2>
+    <span class="snum">14 / 16</span>
+  </div>
+  <div class="sb">
+    <div class="intro" style="margin-bottom:7mm"><p>Un déploiement <strong>en 3 à 4 semaines</strong>, sans interruption de votre activité. Vous n'avez rien à préparer techniquement — nous gérons tout de A à Z.</p></div>
+    <div class="tl" style="margin-bottom:6mm">
+      <div class="tls"><div class="tlp">Semaine 1</div><div class="tld">1</div><h4>Cadrage & Personnalisation</h4><p>Paramétrage de vos entités, filiales et catégories. Adaptation aux couleurs de votre charte graphique.</p></div>
+      <div class="tls"><div class="tlp">Semaine 1-2</div><div class="tld">2</div><h4>VPS & Hébergement</h4><p>Commande et configuration du VPS recommandé. Installation sécurisée de la plateforme. Certificat SSL.</p></div>
+      <div class="tls"><div class="tlp">Semaine 2-3</div><div class="tld">3</div><h4>Migration des archives</h4><p>Import de vos archives existantes. Organisation selon la nouvelle arborescence. Vérification intégrale.</p></div>
+      <div class="tls"><div class="tlp">Semaine 3</div><div class="tld">4</div><h4>Formation des équipes</h4><p>Formation Admin, DMC et RMC. Documentation personnalisée. Guide d'utilisation remis.</p></div>
+      <div class="tls"><div class="tlp">Semaine 4</div><div class="tld">5</div><h4>Mise en production</h4><p>Ouverture officielle. Accompagnement post-lancement. Support prioritaire 30 jours.</p></div>
+    </div>
+    <div class="g3">
+      <div class="card cg">
+        <h3>✅ Ce que nous gérons entièrement</h3>
+        <ul>
+          <li>Configuration du serveur VPS</li>
+          <li>Installation et sécurisation de la plateforme</li>
+          <li>Migration de vos archives existantes</li>
+          <li>Paramétrage SSL, domaine, emails</li>
+        </ul>
+      </div>
+      <div class="card cb">
+        <h3>📦 Ce qui vous est livré</h3>
+        <ul>
+          <li>Code source complet (vous êtes propriétaire)</li>
+          <li>Documentation technique complète</li>
+          <li>Guide utilisateur personnalisé</li>
+          <li>Accès administrateur full control</li>
+        </ul>
+      </div>
+      <div class="card ca">
+        <h3>⚠ Ce dont nous avons besoin</h3>
+        <ul>
+          <li>Liste de vos entités et filiales</li>
+          <li>Charte graphique (couleurs, logo)</li>
+          <li>Archives existantes à migrer</li>
+          <li>Liste des utilisateurs à créer</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="sf"><span>DMC Databox — Proposition Commerciale 2025</span><span class="pn">14</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+ SLIDE 15 — PLAN DE SUPPORT & MAINTENANCE
+═══════════════════════════════════════ -->
+<div class="slide">
+  <div class="sh">
+    <div class="ico"><svg viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/></svg></div>
+    <h2>Support & Maintenance — <em>Vous n'êtes jamais seuls</em></h2>
+    <span class="snum">15 / 16</span>
+  </div>
+  <div class="sb">
+    <table class="tbl" style="margin-bottom:5mm">
+      <thead>
+        <tr>
+          <th>Service inclus</th>
+          <th class="tc">Essentielle</th>
+          <th class="tc">Standard</th>
+          <th class="tc">Premium</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Corrections de bugs critiques</td><td class="tc"><span class="ok">✓</span></td><td class="tc"><span class="ok">✓</span></td><td class="tc"><span class="ok">✓</span></td></tr>
+        <tr><td>Mises à jour de sécurité</td><td class="tc"><span class="no">—</span></td><td class="tc"><span class="ok">✓</span></td><td class="tc"><span class="ok">✓</span></td></tr>
+        <tr><td>Nouvelles fonctionnalités</td><td class="tc"><span class="no">—</span></td><td class="tc"><span class="ok">✓</span></td><td class="tc"><span class="ok">✓</span></td></tr>
+        <tr><td>Support email</td><td class="tc">Non inclus</td><td class="tc">5j/7 · 48h réponse</td><td class="tc">7j/7 · 24h réponse</td></tr>
+        <tr><td>Support téléphonique</td><td class="tc"><span class="no">—</span></td><td class="tc"><span class="no">—</span></td><td class="tc"><span class="ok">✓</span> Prioritaire</td></tr>
+        <tr><td>Sauvegardes automatiques</td><td class="tc">Hebdomadaire</td><td class="tc">Quotidienne</td><td class="tc">Quotidienne + offsite</td></tr>
+        <tr><td>Monitoring serveur</td><td class="tc"><span class="no">—</span></td><td class="tc"><span class="ok">✓</span></td><td class="tc"><span class="ok">✓</span></td></tr>
+        <tr><td>Rapport mensuel d'activité</td><td class="tc"><span class="no">—</span></td><td class="tc"><span class="no">—</span></td><td class="tc"><span class="ok">✓</span></td></tr>
+      </tbody>
+    </table>
+    <div class="g3">
+      <div class="card cg">
+        <h3>🔒 Garantie de continuité</h3>
+        <ul>
+          <li>Le code vous appartient quelle que soit l'offre</li>
+          <li>Même si OXY Conseil ferme, votre plateforme continue</li>
+          <li>Aucune dépendance technique à notre structure</li>
+        </ul>
+      </div>
+      <div class="card cb">
+        <h3>📈 Évolutivité garantie</h3>
+        <ul>
+          <li>Nouvelles fonctionnalités sur demande (devis séparé)</li>
+          <li>Scalabilité du stockage sans migration</li>
+          <li>Montée en version Laravel/Vue.js incluse</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>🤝 Engagement contractuel</h3>
+        <ul>
+          <li>Contrat de maintenance annuel renouvelable</li>
+          <li>SLA défini selon l'offre choisie</li>
+          <li>Résiliation libre sans pénalité</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="sf"><span>DMC Databox — Proposition Commerciale 2025</span><span class="pn">15</span></div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+ SLIDE 16 — CALL TO ACTION
+═══════════════════════════════════════ -->
+<div class="slide s-cta">
+  <div class="cta-chip">Prochaine étape — Passons à l'action</div>
+  <div class="cta-title">Votre DMC Databox<br/>est <em>prête à être déployée.</em></div>
+  <p class="cta-sub">Arrêtez de payer pour une solution qui ne vous appartient pas. Rejoignez les organisations qui ont choisi l'autonomie, la maîtrise et l'efficacité avec DMC Databox — pour un coût 3× inférieur à votre solution actuelle.</p>
+  <div class="cta-btns">
+    <div class="btn1">🚀 Demander une démonstration en direct</div>
+    <div class="btn2">📄 Recevoir une proposition chiffrée</div>
+  </div>
+  <div class="cta-row">
+    <div class="cta-c">
+      <div class="ci"><svg viewBox="0 0 24 24" fill="white" width="16"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+      <span class="cl">Email</span>
+      <span class="cv">contact@oxyconseil.com</span>
+    </div>
+    <div class="cta-c">
+      <div class="ci"><svg viewBox="0 0 24 24" fill="white" width="16"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
+      <span class="cl">Téléphone</span>
+      <span class="cv">+226 XX XX XX XX</span>
+    </div>
+    <div class="cta-c">
+      <div class="ci"><svg viewBox="0 0 24 24" fill="white" width="16"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
+      <span class="cl">Site web</span>
+      <span class="cv">www.oxyconseil.com</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

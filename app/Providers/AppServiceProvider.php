@@ -28,5 +28,6 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('admin', fn ($user) => $user->isAdmin());
         Gate::define('upload', fn ($user) => $user->canUpload());
         Gate::define('delete-document', fn ($user) => $user->canDelete());
+        Gate::define('download', fn ($user) => $user->canDownload());
     }
 }

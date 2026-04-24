@@ -71,6 +71,11 @@ class User extends Authenticatable
         return in_array($this->role, ['admin', 'dmc']);
     }
 
+    public function canDownload(): bool
+    {
+        return in_array($this->role, ['admin', 'dmc', 'rmc']);
+    }
+
     public function canDelete(): bool
     {
         return in_array($this->role, ['admin', 'dmc', 'rmc']);

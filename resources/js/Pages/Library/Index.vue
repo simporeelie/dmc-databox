@@ -15,8 +15,9 @@ const props = defineProps({
 
 const page = usePage();
 const user = page.props.auth.user;
-const canUpload = ['admin', 'dmc'].includes(user.role);
-const canDelete = ['admin', 'dmc', 'rmc'].includes(user.role);
+const canUpload   = ['admin', 'dmc'].includes(user.role);
+const canDelete   = ['admin', 'dmc', 'rmc'].includes(user.role);
+const canDownload = ['admin', 'dmc', 'rmc'].includes(user.role);
 
 // Filtres actifs — chaque clé est un tableau pour la multi-sélection
 const toArr = (v) => v ? [].concat(v).map(String) : [];
@@ -558,7 +559,7 @@ const getDocTags = (doc) => {
                         </span>
 
                         <!-- Export CSV -->
-                        <a :href="exportUrl"
+                        <a v-if="canDownload" :href="exportUrl"
                             class="flex items-center gap-1.5 px-3 py-2 border border-border rounded-lg text-sm text-foreground/80 hover:bg-accent/30 transition"
                             title="Exporter CSV">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -676,7 +677,7 @@ const getDocTags = (doc) => {
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                                 </svg>
                                             </button>
-                                            <a :href="route('documents.download', doc.id)" @click.stop
+                                            <a v-if="canDownload" :href="route('documents.download', doc.id)" @click.stop
                                                 class="p-1 text-muted-foreground hover:text-emerald-600 rounded transition" title="Télécharger">
                                                 <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
@@ -809,7 +810,7 @@ const getDocTags = (doc) => {
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                                     </svg>
                                                 </button>
-                                                <a :href="route('documents.download', doc.id)" @click.stop
+                                                <a v-if="canDownload" :href="route('documents.download', doc.id)" @click.stop
                                                     class="p-1.5 text-muted-foreground hover:text-emerald-600 hover:bg-emerald-500/10 rounded transition" title="Télécharger">
                                                     <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
@@ -903,7 +904,7 @@ const getDocTags = (doc) => {
                         <audio controls preload="metadata" class="w-full" :src="route('documents.stream', preview.id)"/>
                     </div>
                     <div v-else-if="preview.file_extension === 'pdf'" class="mb-4 rounded-xl overflow-hidden bg-accent/60">
-                        <iframe :src="`/storage/${preview.file_path}`" class="w-full h-96 border-0"></iframe>
+                        <iframe :src="`${route('documents.stream', preview.id)}#toolbar=0&navpanes=0&scrollbar=0`" class="w-full h-96 border-0"></iframe>
                     </div>
                     <div v-else class="mb-4 flex items-center justify-center bg-accent/30 rounded-xl h-40">
                         <div class="text-center">
@@ -932,7 +933,7 @@ const getDocTags = (doc) => {
                     <p v-if="preview.description" class="text-foreground/80 text-sm mb-4">{{ preview.description }}</p>
 
                     <div class="flex gap-3">
-                        <a :href="route('documents.download', preview.id)"
+                        <a v-if="canDownload" :href="route('documents.download', preview.id)"
                             class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition text-sm font-medium">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
@@ -1032,7 +1033,7 @@ const getDocTags = (doc) => {
         <!-- ===== BARRE D'ACTION SÉLECTION MULTIPLE ===== -->
         <Transition enter-active-class="transition duration-200 ease-out" enter-from-class="translate-y-4 opacity-0" enter-to-class="translate-y-0 opacity-100"
             leave-active-class="transition duration-150 ease-in" leave-from-class="translate-y-0 opacity-100" leave-to-class="translate-y-4 opacity-0">
-            <div v-if="selectedIds.length > 0"
+            <div v-if="selectedIds.length > 0 && canDownload"
                 class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-foreground text-white rounded-2xl shadow-2xl px-5 py-3 flex items-center gap-4">
                 <span class="text-sm font-medium">
                     {{ selectedIds.length }} document{{ selectedIds.length > 1 ? 's' : '' }} sélectionné{{ selectedIds.length > 1 ? 's' : '' }}
