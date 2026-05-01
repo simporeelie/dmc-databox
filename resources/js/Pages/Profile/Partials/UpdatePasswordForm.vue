@@ -1,6 +1,7 @@
 <script setup>
 import { useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
+import PasswordStrength from '@/Components/PasswordStrength.vue';
 
 const passwordInput = ref(null);
 const currentPasswordInput = ref(null);
@@ -64,6 +65,7 @@ const updatePassword = () => {
                     <i class="ki-filled text-base" :class="showNew ? 'ki-eye-slash' : 'ki-eye'"></i>
                 </button>
             </div>
+            <PasswordStrength :password="form.password" />
             <p v-if="form.errors.password" class="mt-1.5 text-xs text-destructive">{{ form.errors.password }}</p>
         </div>
 

@@ -616,7 +616,7 @@ const getDocTags = (doc) => {
                                         </span>
                                     </div>
                                     <img v-if="doc.file_type === 'image' && doc.thumbnail_path"
-                                        :src="`/storage/${doc.thumbnail_path}`" :alt="doc.title"
+                                        :src="route('documents.thumbnail', doc.id)" :alt="doc.title"
                                         class="w-full h-full object-cover group-hover:scale-105 transition duration-300"/>
                                     <div v-else-if="doc.file_type === 'video'" class="w-full h-full relative bg-foreground">
                                         <video class="w-full h-full object-cover" :data-src="route('documents.stream', doc.id)"
@@ -892,7 +892,7 @@ const getDocTags = (doc) => {
                 </div>
                 <div class="p-5">
                     <div v-if="preview.file_type === 'image'" class="mb-4 rounded-xl overflow-hidden bg-accent/60">
-                        <img :src="`/storage/${preview.file_path}`" :alt="preview.title" class="w-full max-h-96 object-contain"/>
+                        <img :src="route('documents.thumbnail', preview.id)" :alt="preview.title" class="w-full max-h-96 object-contain"/>
                     </div>
                     <div v-else-if="preview.file_type === 'video'" class="mb-4 rounded-xl overflow-hidden bg-black">
                         <video controls preload="metadata" class="w-full max-h-96" :src="route('documents.stream', preview.id)">

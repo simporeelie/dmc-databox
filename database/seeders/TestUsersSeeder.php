@@ -20,7 +20,7 @@ class TestUsersSeeder extends Seeder
             ['email' => 'dmc@dmc-databox.com'],
             [
                 'name'      => 'Utilisateur DMC',
-                'password'  => Hash::make('Dmc@2025'),
+                'password'  => Hash::make('Dmc@2025!Secure'),
                 'role'      => 'dmc',
                 'entity_id' => $entity?->id,
                 'is_active' => true,
@@ -32,7 +32,7 @@ class TestUsersSeeder extends Seeder
             ['email' => 'rmc@dmc-databox.com'],
             [
                 'name'      => 'Utilisateur RMC',
-                'password'  => Hash::make('Rmc@2025'),
+                'password'  => Hash::make('Rmc@2025!Secure'),
                 'role'      => 'rmc',
                 'entity_id' => $entity?->id,
                 'filiale_id' => $filiale?->id,

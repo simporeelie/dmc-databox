@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue';
 import { Head, useForm, router, usePage } from '@inertiajs/vue3';
 import AppLayout from '@/Layouts/AppLayout.vue';
+import PasswordStrength from '@/Components/PasswordStrength.vue';
 
 const props = defineProps({
     users: Array,
@@ -291,6 +292,7 @@ const formatDateShort = (iso) => {
                                         <input v-model="form.password" type="password"
                                             class="w-full border border-input rounded-lg px-3.5 py-2.5 text-sm bg-background text-foreground
                                                    focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" />
+                                        <PasswordStrength :password="form.password" />
                                         <p v-if="form.errors.password" class="text-destructive text-xs mt-1">{{ form.errors.password }}</p>
                                     </div>
 

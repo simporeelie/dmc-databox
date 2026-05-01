@@ -15,6 +15,35 @@ use Inertia\Response;
 
 class DocumentController extends Controller
 {
+    // Extensions autorisées par type avec leur MIME réel
+    private const ALLOWED_MIMES = [
+        'jpg'  => 'image/jpeg',
+        'jpeg' => 'image/jpeg',
+        'png'  => 'image/png',
+        'gif'  => 'image/gif',
+        'webp' => 'image/webp',
+        'svg'  => 'image/svg+xml',
+        'bmp'  => 'image/bmp',
+        'mp4'  => 'video/mp4',
+        'avi'  => 'video/x-msvideo',
+        'mov'  => 'video/quicktime',
+        'wmv'  => 'video/x-ms-wmv',
+        'mkv'  => 'video/x-matroska',
+        'webm' => 'video/webm',
+        'mp3'  => 'audio/mpeg',
+        'wav'  => 'audio/wav',
+        'ogg'  => 'audio/ogg',
+        'aac'  => 'audio/aac',
+        'm4a'  => 'audio/mp4',
+        'pdf'  => 'application/pdf',
+        'doc'  => 'application/msword',
+        'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        'xls'  => 'application/vnd.ms-excel',
+        'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        'ppt'  => 'application/vnd.ms-powerpoint',
+        'pptx' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+    ];
+
     public function index(Request $request): Response
     {
         $query = Document::with(['entity', 'filiale', 'category', 'subcategory'])
@@ -68,10 +97,13 @@ class DocumentController extends Controller
 
     public function store(Request $request)
     {
+        $allowedExtensions = implode(',', array_keys(self::ALLOWED_MIMES));
+        $allowedMimes      = implode(',', array_unique(array_values(self::ALLOWED_MIMES)));
+
         $request->validate([
             'title'          => 'required|string|max:255',
-            'description'    => 'nullable|string',
-            'file'           => 'required|file|max:1048576',
+            'description'    => 'nullable|string|max:5000',
+            'file'           => "required|file|max:1048576|mimes:{$allowedExtensions}|mimetypes:{$allowedMimes}",
             'entity_id'      => 'required|exists:entities,id',
             'filiale_id'     => 'nullable|exists:filiales,id',
             'category_id'    => 'required|exists:categories,id',
@@ -79,11 +111,11 @@ class DocumentController extends Controller
             'year'           => 'required|integer|min:2000|max:2099',
         ]);
 
-        $file = $request->file('file');
-        $extension = $file->getClientOriginalExtension();
-        $fileType = $this->getFileType($extension);
-        $fileName = Str::slug($request->title) . '_' . time() . '.' . $extension;
-        $path = $file->storeAs("documents/{$request->entity_id}/{$request->year}", $fileName, 'public');
+        $file      = $request->file('file');
+        $extension = strtolower($file->getClientOriginalExtension());
+        $fileType  = $this->getFileType($extension);
+        $fileName  = Str::slug($request->title) . '_' . time() . '.' . $extension;
+        $path      = $file->storeAs("documents/{$request->entity_id}/{$request->year}", $fileName, 'local');
 
         $thumbnailPath = $fileType === 'image' ? $path : null;
 
@@ -109,11 +141,16 @@ class DocumentController extends Controller
     public function destroy(Document $document)
     {
         $user = Auth::user();
+
+        if (!$user->canDelete()) {
+            abort(403);
+        }
+
         if ($user->isRmc() && $document->filiale_id !== $user->filiale_id) {
             abort(403);
         }
 
-        Storage::disk('public')->delete($document->file_path);
+        Storage::disk('local')->delete($document->file_path);
         $document->delete();
 
         return back()->with('success', 'Document supprimé.');
@@ -121,9 +158,16 @@ class DocumentController extends Controller
 
     public function update(Request $request, Document $document)
     {
+        $user = Auth::user();
+
+        // RMC ne peut modifier que les documents de sa filiale
+        if ($user->isRmc() && $document->filiale_id !== $user->filiale_id) {
+            abort(403);
+        }
+
         $request->validate([
             'title'          => 'required|string|max:255',
-            'description'    => 'nullable|string',
+            'description'    => 'nullable|string|max:5000',
             'entity_id'      => 'required|exists:entities,id',
             'filiale_id'     => 'nullable|exists:filiales,id',
             'category_id'    => 'required|exists:categories,id',
@@ -166,11 +210,12 @@ class DocumentController extends Controller
         $headers = [
             'Content-Type'        => 'text/csv; charset=UTF-8',
             'Content-Disposition' => 'attachment; filename="documents_' . now()->format('Ymd_His') . '.csv"',
+            'X-Content-Type-Options' => 'nosniff',
         ];
 
         $callback = function () use ($documents) {
             $handle = fopen('php://output', 'w');
-            fprintf($handle, chr(0xEF) . chr(0xBB) . chr(0xBF)); // BOM UTF-8
+            fprintf($handle, chr(0xEF) . chr(0xBB) . chr(0xBF));
             fputcsv($handle, ['Titre', 'Description', 'Type', 'Extension', 'Taille', 'Entité', 'Filiale', 'Catégorie', 'Sous-catégorie', 'Année', 'Téléchargements', 'Ajouté par', 'Date d\'ajout'], ';');
             foreach ($documents as $doc) {
                 fputcsv($handle, [
@@ -197,9 +242,13 @@ class DocumentController extends Controller
 
     public function download(Document $document)
     {
+        if (!Storage::disk('local')->exists($document->file_path)) {
+            abort(404);
+        }
+
         $document->increment('download_count');
 
-        return Storage::disk('public')->download(
+        return Storage::disk('local')->download(
             $document->file_path,
             $document->title . '.' . $document->file_extension
         );
@@ -220,19 +269,17 @@ class DocumentController extends Controller
             abort(404);
         }
 
-        $user = Auth::user();
-
+        $user    = Auth::user();
         $tmpPath = sys_get_temp_dir() . '/dmc_zip_' . uniqid() . '.zip';
-        $zip = new \ZipArchive();
+        $zip     = new \ZipArchive();
         $zip->open($tmpPath, \ZipArchive::CREATE | \ZipArchive::OVERWRITE);
 
         foreach ($documents as $doc) {
-            // RMC ne peut télécharger que sa filiale
             if ($user->isRmc() && $doc->filiale_id !== $user->filiale_id) {
                 continue;
             }
 
-            $filePath = Storage::disk('public')->path($doc->file_path);
+            $filePath = Storage::disk('local')->path($doc->file_path);
             if (file_exists($filePath)) {
                 $doc->increment('download_count');
                 $zip->addFile($filePath, $doc->title . '.' . $doc->file_extension);
@@ -242,13 +289,30 @@ class DocumentController extends Controller
         $zip->close();
 
         return response()->download($tmpPath, 'documents_' . now()->format('Ymd_His') . '.zip', [
-            'Content-Type' => 'application/zip',
+            'Content-Type'           => 'application/zip',
+            'X-Content-Type-Options' => 'nosniff',
         ])->deleteFileAfterSend(true);
+    }
+
+    public function thumbnail(Document $document)
+    {
+        if (!$document->thumbnail_path || !Storage::disk('local')->exists($document->thumbnail_path)) {
+            abort(404);
+        }
+
+        return Storage::disk('local')->response($document->thumbnail_path);
     }
 
     public function stream(Document $document)
     {
-        $path = Storage::disk('public')->path($document->file_path);
+        $user = Auth::user();
+
+        // RMC ne peut streamer que sa filiale
+        if ($user->isRmc() && $document->filiale_id && $document->filiale_id !== $user->filiale_id) {
+            abort(403);
+        }
+
+        $path = Storage::disk('local')->path($document->file_path);
 
         if (!file_exists($path)) {
             abort(404);
@@ -260,17 +324,17 @@ class DocumentController extends Controller
         $end      = $size - 1;
 
         $headers = [
-            'Content-Type'   => $mimeType,
-            'Accept-Ranges'  => 'bytes',
-            'Content-Length' => $size,
+            'Content-Type'           => $mimeType,
+            'Accept-Ranges'          => 'bytes',
+            'Content-Length'         => $size,
+            'X-Content-Type-Options' => 'nosniff',
         ];
 
-        // Gestion des range requests (seek vidéo/audio)
         if (request()->hasHeader('Range')) {
             $range = request()->header('Range');
             preg_match('/bytes=(\d+)-(\d*)/', $range, $matches);
-            $start = (int) $matches[1];
-            $end   = isset($matches[2]) && $matches[2] !== '' ? (int) $matches[2] : $size - 1;
+            $start  = (int) $matches[1];
+            $end    = isset($matches[2]) && $matches[2] !== '' ? (int) $matches[2] : $size - 1;
             $length = $end - $start + 1;
 
             $headers['Content-Range']  = "bytes {$start}-{$end}/{$size}";

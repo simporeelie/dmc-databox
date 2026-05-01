@@ -13,7 +13,7 @@ class AdminUserSeeder extends Seeder
         User::create([
             'name'      => 'Administrateur',
             'email'     => 'admin@dmc-databox.com',
-            'password'  => Hash::make('Admin@2025'),
+            'password'  => Hash::make('Admin@2025!Secure'),
             'role'      => 'admin',
             'is_active' => true,
         ]);

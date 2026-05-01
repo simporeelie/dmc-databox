@@ -3,7 +3,6 @@ import AppLayout from '@/Layouts/AppLayout.vue';
 import { Head, usePage } from '@inertiajs/vue3';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm.vue';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm.vue';
-import DeleteUserForm from './Partials/DeleteUserForm.vue';
 
 defineProps({
     mustVerifyEmail: { type: Boolean },
@@ -99,21 +98,6 @@ const roleLabel = { admin: 'Administrateur', dmc: 'DMC', rmc: 'RMC', viewer: 'Le
                         </div>
                     </div>
 
-                    <!-- Zone danger -->
-                    <div class="bg-background rounded-2xl border border-destructive/30 shadow-sm overflow-hidden">
-                        <div class="px-6 py-4 border-b border-destructive/20 flex items-center gap-3">
-                            <div class="size-8 rounded-lg bg-destructive/10 flex items-center justify-center">
-                                <i class="ki-filled ki-trash text-destructive text-base"></i>
-                            </div>
-                            <div>
-                                <h2 class="text-sm font-semibold text-destructive">Zone dangereuse</h2>
-                                <p class="text-xs text-muted-foreground">Action irréversible</p>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <DeleteUserForm />
-                        </div>
-                    </div>
 
                 </div>
             </div>
