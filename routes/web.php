@@ -3,7 +3,9 @@
 use App\Http\Controllers\ChunkUploadController;
 use App\Http\Controllers\DocumentRequestController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\ExpiredPasswordController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TwoFactorController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EntityController;
@@ -16,6 +18,18 @@ Route::get('/', fn () => redirect()->route('login'));
 
 // Routes authentifiées
 Route::middleware(['auth'])->group(function () {
+
+    // Double authentification (2FA)
+    Route::get('/two-factor/challenge', [TwoFactorController::class, 'challenge'])->name('two-factor.challenge');
+    Route::post('/two-factor/verify',   [TwoFactorController::class, 'verify'])->name('two-factor.verify')->middleware('throttle:10,1');
+    Route::get('/two-factor/setup',     [TwoFactorController::class, 'setup'])->name('two-factor.setup');
+    Route::post('/two-factor/enable',   [TwoFactorController::class, 'enable'])->name('two-factor.enable');
+    Route::post('/two-factor/disable',  [TwoFactorController::class, 'disable'])->name('two-factor.disable');
+
+    // Mot de passe expiré
+    Route::get('/password/expired',  [ExpiredPasswordController::class, 'show'])->name('password.expired');
+    Route::put('/password/expired',  [ExpiredPasswordController::class, 'update'])->name('password.expired.update');
+
 
     // Bibliothèque (tous les utilisateurs connectés)
     Route::get('/library', [DocumentController::class, 'index'])->name('library.index');

@@ -28,6 +28,8 @@ return Application::configure(basePath: dirname(__DIR__))
             \Illuminate\Http\Middleware\AddLinkHeadersForPreloadedAssets::class,
             \App\Http\Middleware\SecurityHeaders::class,
             \App\Http\Middleware\CheckActiveUser::class,
+            \App\Http\Middleware\RequireTwoFactor::class,
+            \App\Http\Middleware\CheckPasswordExpiry::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

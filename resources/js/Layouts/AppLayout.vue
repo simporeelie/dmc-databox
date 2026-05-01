@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { Link, router, usePage } from '@inertiajs/vue3';
+import InactivityGuard from '@/Components/InactivityGuard.vue';
 
 const props = defineProps({
     noPadding: { type: Boolean, default: false },
@@ -481,5 +482,7 @@ onUnmounted(() => {
         leave-active-class="transition duration-200" leave-from-class="opacity-100" leave-to-class="opacity-0">
         <div v-if="showSettings" class="fixed inset-0 bg-black/20 z-40" @click="showSettings = false"></div>
     </Transition>
+
+    <InactivityGuard />
 
 </template>

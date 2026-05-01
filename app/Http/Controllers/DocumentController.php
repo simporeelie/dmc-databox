@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Document;
 use App\Models\Entity;
 use App\Models\Filiale;
+use App\Services\AuditService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -119,6 +120,8 @@ class DocumentController extends Controller
 
         $thumbnailPath = $fileType === 'image' ? $path : null;
 
+        AuditService::log('document.upload', "Document uploadé : {$request->title}");
+
         Document::create([
             'title'          => $request->title,
             'description'    => $request->description,
@@ -150,6 +153,7 @@ class DocumentController extends Controller
             abort(403);
         }
 
+        AuditService::log('document.delete', "Document supprimé : {$document->title}", $document);
         Storage::disk('local')->delete($document->file_path);
         $document->delete();
 
@@ -246,6 +250,7 @@ class DocumentController extends Controller
             abort(404);
         }
 
+        AuditService::log('document.download', "Document téléchargé : {$document->title}", $document);
         $document->increment('download_count');
 
         return Storage::disk('local')->download(
